@@ -8,7 +8,26 @@
           <a-breadcrumb-item>User</a-breadcrumb-item>
           <a-breadcrumb-item>Bill</a-breadcrumb-item>
         </a-breadcrumb>
-        <router-view />
+
+        <router-view #="{ Component }">
+
+          <component :is="Component" />
+        </router-view>
+
+<!--        <router-view v-slot="{ Component }">-->
+<!--          <template v-if="Component">-->
+<!--            <transition-->
+<!--                :name="Object.is(route.meta?.transitionName, false) ? '' : 'fade-transform'"-->
+<!--                mode="out-in"-->
+<!--                appear-->
+<!--            >-->
+<!--              <keep-alive :include="keepAliveComponents">-->
+<!--                <component :is="Component" :key="route.fullPath" />-->
+<!--              </keep-alive>-->
+<!--            </transition>-->
+<!--          </template>-->
+<!--        </router-view>-->
+
 <!--        <div :style="{ padding: '24px', background: '#fff', minHeight: '360px' }">-->
 <!--          Bill is a cat.-->
 <!--        </div>-->

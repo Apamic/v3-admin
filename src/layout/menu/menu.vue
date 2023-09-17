@@ -2,7 +2,7 @@
   <a-layout-sider :collapsed="collapsed" :trigger="null" collapsible>
     <div class="logo" />
     <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
-      <a-menu-item key="1">
+      <a-menu-item key="1" @click="clickMenuItem">
         <pie-chart-outlined />
         <span>Options 1</span>
       </a-menu-item>
@@ -28,7 +28,7 @@
               <span>Team</span>
             </span>
         </template>
-        <a-menu-item key="6">Team 1</a-menu-item>
+        <a-menu-item key="team1" @click="clickMenuItem">Team 1</a-menu-item>
         <a-menu-item key="8">Team 2</a-menu-item>
       </a-sub-menu>
       <a-menu-item key="9">
@@ -48,6 +48,7 @@
     FileOutlined,
     DesktopOutlined,
   } from '@ant-design/icons-vue';
+  import {useRoute, useRouter} from "vue-router";
 
   defineProps({
     collapsed: {
@@ -55,7 +56,24 @@
     }
   })
 
-  let selectedKeys = ref(['3'])
+  const currentRoute = useRoute();
+  const router = useRouter();
+
+  let selectedKeys = ref(['1'])
+
+
+  const clickMenuItem = ({ item, key, keyPath }) => {
+    console.log(key)
+    if (key === currentRoute.name) return;
+    const targetRoute = getRouteByName(key);
+    const { isExt, openMode } = targetRoute?.meta || {};
+    if (isExt && openMode !== 2) {
+      window.open(key);
+    } else {
+      router.push({ name: key });
+    }
+  };
+
 
 </script>
 
