@@ -8,9 +8,10 @@
           <a-breadcrumb-item>User</a-breadcrumb-item>
           <a-breadcrumb-item>Bill</a-breadcrumb-item>
         </a-breadcrumb>
-        <div :style="{ padding: '24px', background: '#fff', minHeight: '360px' }">
-          Bill is a cat.
-        </div>
+        <router-view />
+<!--        <div :style="{ padding: '24px', background: '#fff', minHeight: '360px' }">-->
+<!--          Bill is a cat.-->
+<!--        </div>-->
       </a-layout-content>
       <a-layout-footer >
         <PageFooter></PageFooter>
@@ -25,8 +26,6 @@ import PageHeader from './header/header.vue';
 import PageFooter from './footer/footer.vue';
 import AsideMenu from './menu/menu.vue';
 import { UserOutlined, VideoCameraOutlined, UploadOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons-vue';
-
-
 
 import {ref} from "vue";
 

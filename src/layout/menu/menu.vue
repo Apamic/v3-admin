@@ -4,7 +4,7 @@
     <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
       <a-menu-item key="1">
         <pie-chart-outlined />
-        <span>Option 1</span>
+        <span>Options 1</span>
       </a-menu-item>
       <a-menu-item key="2">
         <desktop-outlined />
@@ -41,6 +41,13 @@
 
 <script setup>
   import {ref} from "vue";
+  import {
+    UserOutlined,
+    PieChartOutlined,
+    TeamOutlined,
+    FileOutlined,
+    DesktopOutlined,
+  } from '@ant-design/icons-vue';
 
   defineProps({
     collapsed: {
@@ -48,7 +55,7 @@
     }
   })
 
-  let selectedKeys = ref(['1'])
+  let selectedKeys = ref(['3'])
 
 </script>
 
