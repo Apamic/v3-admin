@@ -73,8 +73,8 @@ const handleSubmit = () => {
 <style scoped>
 .login-wrap {
   display: flex;
-  width: 100vw;
-  height: 100vh;
+  /*width: 100vw;*/
+  /*height: 100vh;*/
   padding-top: 240px;
   /*background: url('@/assets/login.svg');*/
   background-size: 100%;
