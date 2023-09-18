@@ -61,8 +61,24 @@ const state = reactive({
 });
 
 
-const handleSubmit = () => {
+const handleSubmit = async () => {
+  const { username, password } = state.formInline;
+  console.log(username,password)
+
+  if (username.trim() == '' || password.trim() == '') {
+    return message.warning('用户名或密码不能为空！');
+  }
+
+  message.loading('登录中...', 0);
+  state.loading = true;
+
+
+
+
   message.success('登录成功！')
+
+  state.loading = false;
+  message.destroy();
 }
 
 
