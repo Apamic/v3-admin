@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page-container">
     team1
   </div>
 </template>
@@ -11,5 +11,9 @@ export default {
 </script>
 
 <style scoped>
-
+.page-container {
+  width: 100%;
+  height: 100%;
+  background: deepskyblue;
+}
 </style>

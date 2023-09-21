@@ -1,5 +1,5 @@
 <template>
-  <div>option1</div>
+  <div class="page-container">option1</div>
 </template>
 
 <script>
@@ -9,5 +9,9 @@ export default {
 </script>
 
 <style scoped>
-
+.page-container {
+  width: 100%;
+  height: 100%;
+  background: white;
+}
 </style>

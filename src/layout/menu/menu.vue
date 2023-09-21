@@ -2,18 +2,18 @@
   <a-layout-sider :collapsed="collapsed" :trigger="null" collapsible>
     <div class="logo" />
     <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
-      <a-menu-item key="1" @click="clickMenuItem">
-        <pie-chart-outlined />
+      <a-menu-item key="1" @click="clickMenuItem('option1')">
+        <PieChartOutlined/>
         <span>Options 1</span>
       </a-menu-item>
       <a-menu-item key="2">
-        <desktop-outlined />
+        <DesktopOutlined />
         <span>Option 2</span>
       </a-menu-item>
       <a-sub-menu key="sub1">
         <template #title>
             <span>
-              <user-outlined />
+              <UserOutlined/>
               <span>User</span>
             </span>
         </template>
@@ -24,15 +24,15 @@
       <a-sub-menu key="sub2">
         <template #title>
             <span>
-              <team-outlined />
+              <TeamOutlined/>
               <span>Team</span>
             </span>
         </template>
-        <a-menu-item key="team1" @click="clickMenuItem">Team 1</a-menu-item>
+        <a-menu-item key="team1" @click="clickMenuItem('team1')">Team 1</a-menu-item>
         <a-menu-item key="8">Team 2</a-menu-item>
       </a-sub-menu>
       <a-menu-item key="9">
-        <file-outlined />
+        <FileOutlined/>
         <span>File</span>
       </a-menu-item>
     </a-menu>
@@ -62,16 +62,16 @@
   let selectedKeys = ref(['1'])
 
 
-  const clickMenuItem = ({ item, key, keyPath }) => {
-    console.log(key)
-    if (key === currentRoute.name) return;
-    const targetRoute = getRouteByName(key);
-    const { isExt, openMode } = targetRoute?.meta || {};
-    if (isExt && openMode !== 2) {
-      window.open(key);
-    } else {
+  const clickMenuItem = ( key ) => {
+    // console.log(key)
+    // if (key === currentRoute.name) return;
+    // const targetRoute = getRouteByName(key);
+    // const { isExt, openMode } = targetRoute?.meta || {};
+    // if (isExt && openMode !== 2) {
+    //   window.open(key);
+    // } else {
       router.push({ name: key });
-    }
+    // }
   };
 
 

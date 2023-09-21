@@ -1,10 +1,9 @@
 import { createApp } from 'vue'
 import './style/reset.css'
+import './style/transition.css'
 import App from './App.vue'
 import { setupRouter } from './router';
 
-// import 'ant-design-vue/es/message/style/css';
-// import 'ant-design-vue/es/notification/style/css';
 
 
 const app = createApp(App)

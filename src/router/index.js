@@ -25,7 +25,7 @@ export const constantRoutes = [
                 name: 'team',
                 children: [
                     {
-                        path: '/team',
+                        path: '/team/team1',
                         name: 'team1',
                         component: () => import('@/views/team/team1.vue')
                     }

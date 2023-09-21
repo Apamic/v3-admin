@@ -9,9 +9,13 @@
           <a-breadcrumb-item>Bill</a-breadcrumb-item>
         </a-breadcrumb>
 
-        <router-view #="{ Component }">
+        <router-view  v-slot="{ Component }">
+          <template v-if="Component">
+            <transition name="fade-transform"  mode="out-in" appear>
+              <component :is="Component" />
+            </transition>
+          </template>
 
-          <component :is="Component" />
         </router-view>
 
 <!--        <router-view v-slot="{ Component }">-->
@@ -68,5 +72,7 @@ let collapsed = ref(false)
   height: 100vh;
   overflow: hidden;
 }
+
+
 
 </style>
