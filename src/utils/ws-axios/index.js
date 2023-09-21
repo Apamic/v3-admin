@@ -1,87 +1,26 @@
-const requestBefore = Symbol('requestBefore')
-const requestAfter = Symbol('requestAfter')
+import { WsAxios } from './WsAxios';
 
-export class WsAxios {
-    #config = {
-        url: '', // 地址
-        time: 3000, // 心跳间隔(毫秒)
-        ping: () => ({}), // ping code,
-    }
-    #ws = null; // websocket示例对象
-    #requestId = 0; // callbacks对象key
-    #callbacks = {}; // 回调函数队列
-    #lockReconnect = false; //避免重复连接
-    #pingTimer = null; // 心跳包定时器
-    #reconnectTimer = null; // 重连定时器
+const wsAxios = new WsAxios({
+    url: import.meta.env.VITE_WEBSOCKET_API || '',
+    time: 6000,
+    ping: () => ({
+        source: 'h5',
+        userid: sessionStorage.getItem('yzkf_userid'),
+        ts: new Date().getTime(),
+        data: { upcmd: 'ping' },
+    }),
+})
 
-    constructor(config= this.#config) {
-        Object.assign(this.#config,config)
-        this.#createWebSocket()
-    }
+// websocket请求拦截
+wsAxios.intercepts.request((params) => {
+    console.log(params, '请求拦截：params');
+    return params;
+});
 
-    intercepts = {
-        request: (func) => {
-            if (func) {
-                WsAxios[requestBefore] = func;
-            } else {
-                WsAxios[requestBefore] = (request) => request;
-            }
-        },
-        response: (func) => {
-            if (func) {
-                WsAxios[requestAfter] = func;
-            } else {
-                WsAxios[requestAfter] = (response) => response;
-            }
-        }
-    };
+// websocket响应拦截
+wsAxios.intercepts.response((response) => {
+    console.log('响应拦截：', response);
+    return response;
+});
 
-    static [requestBefore](config) {
-        return config;
-    }
-
-    static [requestAfter](response) {
-        return response;
-    }
-
-    #createWebSocket() {
-        this.#ws = new WebSocket(this.#config.url);
-        this.#ws.open = () => {
-            this.clearAllTimer();
-
-        }
-    }
-
-    sendCommand(params) {
-        const requestId = ++this.#requestId;
-
-        params['requestId'] = requestId;
-
-
-    }
-
-    ping() {
-        if (Object.keys(this.#callbacks).length === 0) {
-            const messageObject = this.#config.ping();
-            return this.sendCommand(messageObject);
-        }
-    }
-
-    #hearBeat() {
-        this.#pingTimer = setTimeout(async ()=> {
-            await this.ping();
-            this.#hearBeat();
-        },this.#config.time)
-    }
-
-    clearAllTimer() {
-        clearTimeout(this.#pingTimer);
-        clearTimeout(this.#reconnectTimer);
-    }
-
-    destroyed() {
-        this.clearAllTimer();
-        this.#ws?.close();
-    }
-
-}
+export default wsAxios;
