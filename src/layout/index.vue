@@ -3,13 +3,13 @@
     <AsideMenu v-model:collapsed="collapsed"></AsideMenu>
     <a-layout>
       <PageHeader v-model:collapsed="collapsed"></PageHeader>
-      <a-layout-content style="margin: 0 16px">
+      <a-layout-content style="margin: 0 16px" class="layout-content">
         <a-breadcrumb style="margin: 16px 0">
           <a-breadcrumb-item>User</a-breadcrumb-item>
           <a-breadcrumb-item>Bill</a-breadcrumb-item>
         </a-breadcrumb>
 
-        <router-view  v-slot="{ Component }">
+        <router-view v-slot="{ Component }">
           <template v-if="Component">
             <transition name="fade-transform"  mode="out-in" appear>
               <component :is="Component" />
@@ -59,9 +59,7 @@ let collapsed = ref(false)
 
 </script>
 
-<style scoped>
-
-
+<style lang="less" scoped>
 .site-layout .site-layout-background {
   background: #fff;
 }
@@ -73,6 +71,8 @@ let collapsed = ref(false)
   overflow: hidden;
 }
 
-
+.layout-content {
+  height: calc(100% - @header-height);
+}
 
 </style>

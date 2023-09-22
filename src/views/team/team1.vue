@@ -1,6 +1,9 @@
 <template>
   <div class="page-container">
     team1
+    <span class="demo">
+      demo
+    </span>
   </div>
 </template>
 
@@ -10,10 +13,12 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .page-container {
-  width: 100%;
   height: 100%;
   background: deepskyblue;
+  .demo {
+    background: red;
+  }
 }
 </style>

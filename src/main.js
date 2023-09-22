@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
-import './style/reset.css'
-import './style/transition.css'
+import './styles/reset.css'
+import './styles/transition.css'
 import App from './App.vue'
 import { setupRouter } from './router';
 

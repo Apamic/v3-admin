@@ -38,6 +38,18 @@ export default defineConfig({
     //   }
     // },
   },
+
+  css: {
+    preprocessorOptions: {
+      less: {
+        javascriptEnabled: true,
+        additionalData: `
+            @import "@/styles/variables.less";
+          `,
+      }
+    }
+  },
+
   build:{
     minify: 'terser',
     terserOptions: {
