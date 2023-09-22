@@ -1,7 +1,9 @@
-import { createStore,createLogger} from "vuex";
+import { createPinia } from 'pinia';
 
-export const store = createStore({
-    modules:{
+const store = createPinia()
 
-    }
-})
+export function setupStore(app) {
+    app.use(store);
+};
+
+export { store }
