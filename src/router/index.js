@@ -45,6 +45,15 @@ const router = createRouter({
     routes: constantRoutes
 })
 
+export function resetRouter() {
+    router.getRoutes().forEach((route) => {
+        const { name } = route
+        if (name && !whiteNameList.some((n) => n === name)) {
+            router.hasRoute(name) && router.removeRoute(name);
+        }
+    })
+}
+
 
 export async function setupRouter(app) {
     // 创建路由守卫
