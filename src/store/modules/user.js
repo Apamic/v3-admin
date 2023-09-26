@@ -73,9 +73,9 @@ export const useUserStore = defineStore({
         },
 
         async logout() {
-            await logout()
-            const wsStore = useWsStore();
-            wsStore.closeSocket();
+            // await logout()
+            // const wsStore = useWsStore();
+            // wsStore.closeSocket();
             this.resetToken();
             resetRouter();
         }
