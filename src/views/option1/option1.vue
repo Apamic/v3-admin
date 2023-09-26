@@ -2,10 +2,13 @@
   <div class="page-container">option1</div>
 </template>
 
-<script>
-export default {
-  name: "option1"
-}
+
+<script setup>
+import { useUserStore } from '@/store/modules/user';
+
+console.log( useUserStore().name)
+
+
 </script>
 
 <style scoped>
