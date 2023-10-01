@@ -8,10 +8,11 @@ export function filterAsyncRoute (routes,parentRoute,lastNamePath) {
             const { router, viewPath, name, icon, orderNum, keepalive, isExt, openMode } = item;
             let fullPath = '';
             const pathPrefix = lastNamePath.at(-1) || '';
-            if (isUrl(router)) {
+            if ( isUrl(router) ) {
                 fullPath = router;
             } else {
-
+                fullPath = router.startsWith('/') ? router : `/${router}`;
+                fullPath = router.startsWith(pathPrefix) ? fullPath : pathPrefix + router;
             }
         })
 }
