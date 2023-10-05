@@ -3,6 +3,12 @@ import {uniqueSlash} from "../utils/urlUtils";
 import RouterView from '@/layout/index.vue';
 import { Result } from 'ant-design-vue';
 import router, { routes } from '@/router/index.vue';
+import common from '@/router/staticModules';
+import { notFound, errorRoute } from './staticModules/error';
+import outsideLayout from './outsideLayout';
+
+// 需要放在所有路由之后的路由
+const endRoutes = [errorRoute, notFound];
 
 export function filterAsyncRoute (routes,parentRoute,lastNamePath) {
     return routes
@@ -85,9 +91,28 @@ export const generatorDynamicRouter = (asyncMenus) => {
         const layout = routes.find((item) => item.name == 'Layout');
         // console.log(routeList, '根据后端返回的权限路由生成');
         // 给公共路由添加namePath
-        //generatorNamePath(common);
-    } catch (e) {
+        generatorNamePath(common);
+        const menus = [...common,...routeList];
+        layout.children = menus;
+        const removeRoute = router.addRoute(layout);
+        // 获取所有没有包含children的路由，上面addRoute的时候，vue-router已经帮我们拍平了所有路由
+        const filterRoutes = router.getRoutes().filter(item =>
+            (!item.children.length || Object.is(item.meta?.hideChildrenInMenu,true))
+            && !!outsideLayout.some((n) => n.name === item.name));
 
+        // 清空所有路由
+        removeRoute();
+        layout.chlidren = [...filterRoutes]
+        // 重新添加拍平后的路由
+        router.addRoute(layout);
+        //console.log('所有路由', router.getRoutes());
+        return Promise.resolve({
+            menus,
+            routes: layout.children,
+        });
+    } catch (error) {
+        console.error('生成路由时出错', error);
+        return Promise.reject(`生成路由时出错: ${error}`);
     }
 
 }
