@@ -1,5 +1,6 @@
 const toString = Object.prototype.toString;
 
+const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
 
 export function is(val , type) {
     return toString.call(val) === `[object ${type}]`;
@@ -53,12 +54,20 @@ export function isNullAndUnDef(val) {
     return isUnDef(val) && isNull(val);
 }
 
+export function isNullOrUnDef(val) {
+    return isUnDef(val) || isNull(val);
+}
+
 export function isNumber(val) {
     return is(val, 'Number');
 }
 
 export function isBoolean(val) {
     return is(val, 'Boolean');
+}
+
+export function isAsyncFunction(val) {
+    return val instanceof AsyncFunction;
 }
 
 export function isFunction(val) {
@@ -76,6 +85,10 @@ export function isElement(val) {
 export function isMap(val) {
     return is(val,'Map')
 }
+
+export const isServer = typeof window === 'undefined';
+
+export const isClient = !isServer;
 
 export function isUrl(path) {
     const reg =
