@@ -67,6 +67,4 @@ export async function setupRouter(app) {
 }
 
 
-
-
 export default router
