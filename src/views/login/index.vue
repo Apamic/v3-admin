@@ -65,7 +65,7 @@ const state = reactive({
 const route = useRoute();
 const router = useRouter();
 
-const userStore = useUserStore();
+// const userStore = useUserStore();
 
 const handleSubmit = async () => {
   const { username, password } = state.formInline;
@@ -77,8 +77,6 @@ const handleSubmit = async () => {
 
   message.loading('登录中...', 0);
   state.loading = true;
-
-
 
 
   message.success('登录成功！')

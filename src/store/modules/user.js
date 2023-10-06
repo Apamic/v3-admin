@@ -3,7 +3,7 @@ import { store } from '@/store';
 import { Storage } from '@/utils/Storage';
 import { ACCESS_TOKEN_KEY } from '@/enums/cacheEnum';
 import { login } from '@/api/login';
-
+// import { generatorDynamicRouter } from "../../router/generatorRouter";
 
 
 export const useUserStore = defineStore({
@@ -65,7 +65,7 @@ export const useUserStore = defineStore({
                 this.avatar = userInfo.headImg;
                 this.userInfo = userInfo;
                 // 生成路由
-                const generatorResult  = await generatorDynamicRouter(menus);
+               // const generatorResult  = await generatorDynamicRouter(menus);
                 this.menus = generatorResult.menus.filter((item) => !item.meta?.hideInMenu)
 
                 return { menus, perms, userInfo };
