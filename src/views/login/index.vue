@@ -47,6 +47,8 @@
 <script setup>
 import { reactive } from 'vue';
 import { message, Modal } from 'ant-design-vue';
+import {useRoute, useRouter} from "vue-router";
+import {useUserStore} from "../../store/modules/user";
 
 
 const state = reactive({
@@ -60,6 +62,10 @@ const state = reactive({
   },
 });
 
+const route = useRoute();
+const router = useRouter();
+
+const userStore = useUserStore();
 
 const handleSubmit = async () => {
   const { username, password } = state.formInline;

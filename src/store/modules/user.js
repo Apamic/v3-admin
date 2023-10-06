@@ -1,7 +1,9 @@
 import { defineStore } from 'pinia';
 import { store } from '@/store';
-import { Storage } from '@/utils/Storage'
-import { ACCESS_TOKEN_KEY } from '@/enums/cacheEnum'
+import { Storage } from '@/utils/Storage';
+import { ACCESS_TOKEN_KEY } from '@/enums/cacheEnum';
+import { login } from '@/api/login';
+
 
 
 export const useUserStore = defineStore({
