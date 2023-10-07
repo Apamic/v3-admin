@@ -48,8 +48,8 @@ export const useUserStore = defineStore({
 
         async login(params) {
             try {
-                const { data } = await login(params);
-                this.setToken(data.token);
+                // const { data } = await login(params);
+                // this.setToken(data.token);
                 return this.afterLogin();
             } catch (error) {
                 return Promise.reject(error)
@@ -59,13 +59,49 @@ export const useUserStore = defineStore({
         async afterLogin() {
             try {
 
-                const [userInfo, { perms, menus }] = await Promise.all([getInfo(), permmenu()]);
-                this.perms = perms;
-                this.name = userInfo.name;
-                this.avatar = userInfo.headImg;
-                this.userInfo = userInfo;
+                // const [userInfo, { perms, menus }] = await Promise.all([getInfo(), permmenu()]);
+                const menus = [
+                    {
+                        "createdAt": "2020-08-28 10:09:26",
+                        "updatedAt": "2021-12-08 14:51:06",
+                        "id": 1,
+                        "parentId": null,
+                        "name": "team",
+                        "router": "/team",
+                        "perms": null,
+                        "type": 0,
+                        "icon": "icon-shezhi",
+                        "orderNum": 255,
+                        "viewPath": null,
+                        "keepalive": true,
+                        "isShow": true,
+                        "isExt": false,
+                        "openMode": 1
+                    },
+                    {
+                        "createdAt": "2020-10-19 03:07:18",
+                        "updatedAt": "2023-06-11 10:17:23",
+                        "id": 2,
+                        "parentId": 1,
+                        "name": "team1",
+                        "router": "/team/team1",
+                        "perms": null,
+                        "type": 1,
+                        "icon": "icon-rizhi1",
+                        "orderNum": 0,
+                        "viewPath": "/team/team1.vue",
+                        "keepalive": true,
+                        "isShow": true,
+                        "isExt": false,
+                        "openMode": 1
+                    }
+                ]
+                // this.perms = perms;
+                // this.name = userInfo.name;
+                // this.avatar = userInfo.headImg;
+                // this.userInfo = userInfo;
                 // 生成路由
-               // const generatorResult  = await generatorDynamicRouter(menus);
+                const generatorResult  = await generatorDynamicRouter(menus);
                 this.menus = generatorResult.menus.filter((item) => !item.meta?.hideInMenu)
 
                 return { menus, perms, userInfo };

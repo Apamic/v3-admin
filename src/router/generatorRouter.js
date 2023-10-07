@@ -6,6 +6,7 @@ import router, { routes } from '@/router/index.vue';
 import common from '@/router/staticModules';
 import { notFound, errorRoute } from './staticModules/error';
 import outsideLayout from './outsideLayout';
+import {asyncRoutes} from "./asyncModules";
 
 // 需要放在所有路由之后的路由
 const endRoutes = [errorRoute, notFound];
@@ -58,19 +59,19 @@ export function filterAsyncRoute (routes,parentRoute,lastNamePath) {
                     route.children = children;
                     route.redirect = { name: children[0].name };
                 } else {
-                    // route.component = (
-                    //     <Result
-                    //         status="500"
-                    //         title={name}
-                    //         sub-title="目录类型菜单不是真实页面，请为当前目录添加页面级子菜单或更改当前菜单类型."
-                    //     />
-                    // );
+                    route.component = (
+                        <Result
+                            status="500"
+                            title={name}
+                            sub-title="目录类型菜单不是真实页面，请为当前目录添加页面级子菜单或更改当前菜单类型."
+                        />
+                    );
                     return route;
                 }
             } else if (item.type === 1) {
                 //如果是页面
-                // const Component = isExt && openMode === 2 ? (<IFramePage src={fullPath} />) : ( asyncRoutes[viewPath] || NotFound);
-                // route.component = Component;
+                const Component = isExt && openMode === 2 ? (<IFramePage src={fullPath} />) : ( asyncRoutes[viewPath] || NotFound);
+                route.component = Component;
 
                 const perms = routes.filter((n) => n.parentId === item.id).flatMap((n) => n.perms?.split(','));
                 if (route.meta && perms) {
