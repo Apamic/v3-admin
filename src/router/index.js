@@ -28,6 +28,17 @@ export const constantRoutes = [
                         path: '/team/team1',
                         name: 'team1',
                         component: () => import('@/views/team/team1.vue')
+                    },
+                    {
+                        path: '/team/team2',
+                        name: 'team2',
+                        children: [
+                            {
+                                path: '/team/team2/team22',
+                                name: 'team22',
+                                component: () => import('@/views/team/team22.vue')
+                            }
+                        ]
                     }
                 ]
             },

@@ -2,7 +2,7 @@ import {defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
 
 import {AntDesignVueResolver} from 'unplugin-vue-components/resolvers'  //自动按需引入 需要AntDesign版本兼容
-import Components from 'unplugin-vue-components/vite' //自动按需引入
+import Components from 'unplugin-vue-components/vite' //自动按需引入 ref,reactive等
 
 import {resolve} from 'path'
 

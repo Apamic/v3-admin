@@ -6,21 +6,6 @@
         <PieChartOutlined/>
         <span>Options 1</span>
       </a-menu-item>
-      <a-menu-item key="2">
-        <DesktopOutlined />
-        <span>Option 2</span>
-      </a-menu-item>
-      <a-sub-menu key="sub1">
-        <template #title>
-            <span>
-              <UserOutlined/>
-              <span>User</span>
-            </span>
-        </template>
-        <a-menu-item key="3">Tom</a-menu-item>
-        <a-menu-item key="4">Bill</a-menu-item>
-        <a-menu-item key="5">Alex</a-menu-item>
-      </a-sub-menu>
       <a-sub-menu key="sub2">
         <template #title>
             <span>
@@ -28,8 +13,23 @@
               <span>Team</span>
             </span>
         </template>
-        <a-menu-item key="team1" @click="clickMenuItem('team1')">Team 1</a-menu-item>
-        <a-menu-item key="8">Team 2</a-menu-item>
+        <a-menu-item key="team1" @click="clickMenuItem('team1')">
+          Team 1
+        </a-menu-item>
+        <a-sub-menu key="team2">
+          <template #title>
+            <span>
+              <TeamOutlined/>
+              <span>Team2</span>
+            </span>
+          </template>
+          <a-menu-item key="team22"  @click="clickMenuItem('team22')">
+            <span>
+              <TeamOutlined/>
+              <span>Team22</span>
+            </span>
+          </a-menu-item>
+        </a-sub-menu>
       </a-sub-menu>
       <a-menu-item key="9">
         <FileOutlined/>
@@ -40,6 +40,7 @@
 </template>
 
 <script setup>
+  //import { Menu } from 'ant-design-vue';
   import { ref } from "vue";
   import {
     UserOutlined,
