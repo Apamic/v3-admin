@@ -1,15 +1,13 @@
 <template>
   <a-layout-sider :collapsed="collapsed" :trigger="null" collapsible>
     <div class="logo" />
-    <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
+    <a-menu v-model:selectedKeys="state.selectedKeys" theme="dark" mode="inline">
       <a-menu-item key="1" @click="clickMenuItem('option1')">
-        <PieChartOutlined/>
-        <span>Options 1</span>
+        <span v-bind="$attrs">Options 1</span>
       </a-menu-item>
       <a-sub-menu key="sub2">
         <template #title>
             <span>
-              <TeamOutlined/>
               <span>Team</span>
             </span>
         </template>
@@ -19,7 +17,6 @@
         <a-sub-menu key="team2">
           <template #title>
             <span>
-              <TeamOutlined/>
               <span>Team2</span>
             </span>
           </template>
@@ -31,25 +28,26 @@
           </a-menu-item>
         </a-sub-menu>
       </a-sub-menu>
-      <a-menu-item key="9">
-        <FileOutlined/>
-        <span>File</span>
-      </a-menu-item>
+<!--      <a-menu-item key="9">-->
+<!--        <span>File</span>-->
+<!--      </a-menu-item>-->
     </a-menu>
   </a-layout-sider>
 </template>
 
 <script setup>
   //import { Menu } from 'ant-design-vue';
-  import { ref } from "vue";
-  import {
-    UserOutlined,
-    PieChartOutlined,
-    TeamOutlined,
-    FileOutlined,
-    DesktopOutlined,
-  } from '@ant-design/icons-vue';
+  import {reactive, ref} from "vue";
+  // import {
+  //   UserOutlined,
+  //   PieChartOutlined,
+  //   TeamOutlined,
+  //   FileOutlined,
+  //   DesktopOutlined,
+  // } from '@ant-design/icons-vue';
   import {useRoute, useRouter} from "vue-router";
+
+
 
   defineProps({
     collapsed: {
@@ -60,8 +58,15 @@
   const currentRoute = useRoute();
   const router = useRouter();
 
-  let selectedKeys = ref(['1'])
 
+
+  const state = reactive({
+    selectedKeys: ['1'],
+    openKeys: []
+  })
+
+
+  // console.log(currentRoute.meta)
 
   const clickMenuItem = ( key ) => {
     // console.log(key)
