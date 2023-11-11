@@ -11,32 +11,51 @@ export const constantRoutes = [
         redirect: '/option1',
         component: () => import('@/layout/index.vue'),
         meta: {
-            title: '首页',
+            title: '布局',
         },
         children: [
             {
                 path: '/option1',
                 name: 'option1',
-                component: () => import('@/views/option1/option1.vue')
+                component: () => import('@/views/option1/option1.vue'),
+                meta: {
+                    title: 'option1',
+                    type: 1
+                }
             },
 
             {
                 path: '/team',
                 name: 'team',
+                meta: {
+                    type: 0
+                },
                 children: [
                     {
                         path: '/team/team1',
                         name: 'team1',
-                        component: () => import('@/views/team/team1.vue')
+                        component: () => import('@/views/team/team1.vue'),
+                        meta: {
+                            title: 'team1',
+                            type: 1
+                        }
                     },
                     {
                         path: '/team/team2',
                         name: 'team2',
+                        meta: {
+                            title: 'team2',
+                            type: 0
+                        },
                         children: [
                             {
                                 path: '/team/team2/team22',
                                 name: 'team22',
-                                component: () => import('@/views/team/team22.vue')
+                                component: () => import('@/views/team/team22.vue'),
+                                meta: {
+                                    title: 'team22',
+                                    type: 1
+                                }
                             }
                         ]
                     }
