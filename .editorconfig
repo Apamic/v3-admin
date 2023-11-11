@@ -1,0 +1,14 @@
+# 因为 EditorConfig 插件会在打开文件的目录和每个父级目录中查找名为 .editorconfig 的文件，直到找到root文件或带有 root=true 的 .editorconfig 文件才会停止，所以我们需要指定该项为 true
+root = true
+
+[*] # 表示希望匹配全部文件
+charset = utf-8 # 设置默认字符集为 utf-8
+indent_style = space # 设置缩进风格 tab或space，这里选择 空格
+indent_size = 4 # 设置缩进空格数
+end_of_line = lf # 设置结尾换行类型 lf或cr或crlf
+trim_trailing_whitespace = true # 是否删除换行符之前的任何空格字符
+insert_final_newline = true # 是否在保存时以换行符结束，就是末尾要另起一行
+
+[*.md] # 表示仅 md 文件适用以下规则
+max_line_length = off
+trim_trailing_whitespace = false
