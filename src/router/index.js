@@ -8,22 +8,30 @@ export const constantRoutes = [
     {
         path: '/',
         name: 'Layout',
-        redirect: '/option1',
+        redirect: '/option',
         component: () => import('@/layout/index.vue'),
         meta: {
             title: '布局',
         },
         children: [
             {
-                path: '/option1',
-                name: 'option1',
-                component: () => import('@/views/option1/option1.vue'),
+                path: '/dashboard',
+                name: 'dashboard',
+                component: () => import('@/views/dashboard/index.vue'),
                 meta: {
-                    title: 'option1',
+                    title: 'dashboard',
                     type: 1
                 }
             },
-
+            {
+                path: '/option',
+                name: 'option',
+                component: () => import('@/views/option/option.vue'),
+                meta: {
+                    title: 'option',
+                    type: 1
+                }
+            },
             {
                 path: '/team',
                 name: 'team',
@@ -61,8 +69,6 @@ export const constantRoutes = [
                     }
                 ]
             },
-
-
         ],
     },
 

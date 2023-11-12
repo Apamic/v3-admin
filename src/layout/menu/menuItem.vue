@@ -5,7 +5,7 @@
                <span>{{ item.name }}</span>
             </span>
         </template>
-        <template v-for="(items,k) in item.children" v-if="item.children.length > 0">
+        <template v-for="(items,k) in item.children" v-if="item.children?.length > 0">
             <menuItem :item="items"></menuItem>
         </template>
     </a-sub-menu>
