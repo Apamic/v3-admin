@@ -15,10 +15,8 @@ defineProps({
 
 <style lang="less" scoped>
 .logo {
-
     display: flex;
     align-items: center;
-
     height: 64px;
     padding-left: 12px;
     line-height: 64px;
