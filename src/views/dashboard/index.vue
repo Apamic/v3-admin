@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="view-container">
         dash board
     </div>
 </template>
@@ -13,5 +13,15 @@ defineOptions({
 </script>
 
 <style lang="less" scoped>
+.box {
 
+    img {
+        flex: 1;
+        min-height: 0;
+    }
+
+    .ant-form {
+        flex: 2;
+    }
+}
 </style>

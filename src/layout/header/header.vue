@@ -1,11 +1,6 @@
 <template>
   <a-layout-header style="background: #fff; padding: 0">
-<!--    <MenuUnfoldOutlined-->
-<!--        v-if="collapsed"-->
-<!--        class="trigger"-->
-<!--        @click="() => (collapsed = !collapsed)"-->
-<!--    />-->
-<!--    <MenuFoldOutlined v-else class="trigger" @click="() => (collapsed = !collapsed)" />-->
+
     <span class="trigger" @click="() => emit('update:collapsed', !collapsed)">
        <component :is="collapsed ? MenuUnfoldOutlined : MenuFoldOutlined" />
     </span>

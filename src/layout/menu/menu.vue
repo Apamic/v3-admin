@@ -1,8 +1,7 @@
 <template>
     <a-layout-sider :collapsed="collapsed" :trigger="null" collapsible>
-        <Logo :collapsed="collapsed"></Logo>
         <a-menu v-model:selectedKeys="state.selectedKeys" theme="dark" mode="inline" collapsible >
-            <template v-for="(item,k) in routerList">
+            <template v-for="item in routerList">
                 <menuItem :item="item">
                 </menuItem>
             </template>
@@ -11,17 +10,11 @@
 </template>
 
 <script setup>
-//import { Menu } from 'ant-design-vue';
+
 import {reactive, ref} from "vue";
 import menuItem from './menuItem.vue'
-import Logo from '../logo/index.vue';
-// import {
-//   UserOutlined,
-//   PieChartOutlined,
-//   TeamOutlined,
-//   FileOutlined,
-//   DesktopOutlined,
-// } from '@ant-design/icons-vue';
+
+
 import {useRoute, useRouter} from "vue-router";
 
 
@@ -35,11 +28,11 @@ const currentRoute = useRoute();
 const router = useRouter();
 
 const routerList = router.options.routes[0].children
-console.log(routerList, 'routerList')
+//console.log(routerList, 'routerList')
 
 
 const state = reactive({
-    selectedKeys: ['option1'],
+    selectedKeys: [],
     openKeys: [],
     routerList: routerList
 })

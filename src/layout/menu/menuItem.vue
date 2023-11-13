@@ -1,21 +1,20 @@
 <template>
     <a-sub-menu :key="item.name" v-if="item.meta?.type === 0">
         <template #title>
-            <span>
-               <span>{{ item.name }}</span>
-            </span>
+            <menuItemContent :item="item"></menuItemContent>
         </template>
         <template v-for="(items,k) in item.children" v-if="item.children?.length > 0">
             <menuItem :item="items"></menuItem>
         </template>
     </a-sub-menu>
     <a-menu-item :key="item.name" v-else @click="clickMenuItem(item.name)">
-        <span>{{ item.name }}</span>
+        <menuItemContent :item="item"></menuItemContent>
     </a-menu-item>
 </template>
 
 <script setup>
 import {useRoute, useRouter} from "vue-router";
+import menuItemContent from "./menuItemContent.vue";
 
 defineOptions({
     name: 'menuItem'

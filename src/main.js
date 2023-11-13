@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import './styles/reset.css'
 import './styles/transition.css'
 import './styles/common.less'
+import './styles/global.less'
 import App from './App.vue'
 import { setupRouter } from './router';
 import { setupStore } from '@/store';

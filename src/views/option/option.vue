@@ -1,5 +1,5 @@
 <template>
-  <div class="page-container">option1</div>
+  <div class="box">option1</div>
 </template>
 
 
@@ -11,10 +11,21 @@ console.log( useUserStore().name)
 
 </script>
 
-<style scoped>
-.page-container {
-  width: 100%;
-  height: 100%;
-  background: white;
+<style lang="less" scoped>
+.box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: calc(100vh - 120px);
+    padding: 12px;
+    background: #fff;
+img {
+    flex: 1;
+    min-height: 0;
+}
+
+.ant-form {
+    flex: 2;
+}
 }
 </style>

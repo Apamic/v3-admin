@@ -8,10 +8,10 @@ export const constantRoutes = [
     {
         path: '/',
         name: 'Layout',
-        redirect: '/option',
+        redirect: '/dashboard',
         component: () => import('@/layout/index.vue'),
         meta: {
-            title: '布局',
+            title: '首页',
         },
         children: [
             {
@@ -36,7 +36,8 @@ export const constantRoutes = [
                 path: '/team',
                 name: 'team',
                 meta: {
-                    type: 0
+                    type: 0,
+                    title: 'team',
                 },
                 children: [
                     {

@@ -1,5 +1,5 @@
 <template>
-  <div class="page-container">
+  <div class="view-container">
     team1
     <span class="demo">
       demo
@@ -14,11 +14,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.page-container {
-  height: 100%;
-  background: deepskyblue;
-  .demo {
-    background: red;
-  }
-}
+
+
 </style>

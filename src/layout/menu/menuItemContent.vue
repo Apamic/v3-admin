@@ -1,20 +1,18 @@
 <template>
-  <div>
-    content
-  </div>
+    <span>{{item.meta?.title}}</span>
 </template>
 
 <script setup>
-  defineOptions({
+defineOptions({
     name: 'menuItemContent'
-  })
+})
 
-  defineProps({
+defineProps({
     item: {
-      type: Object,
-      default: () => {}
+        type: Object,
+        default: () => ({})
     }
-  })
+})
 </script>
 
 <style lang="less" scoped>
