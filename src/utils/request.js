@@ -10,7 +10,7 @@ const baseMockUrl = ''
 
 
 const service = axios.create({
-    // baseURL: 'baseApiUrl',
+    baseURL: 'http://job1016.000webhostapp.com',
     timeout: 6000
 });
 
@@ -21,6 +21,8 @@ service.interceptors.request.use(
         if (token && config.headers) {
             config.headers['Authorization'] = token;
         }
+
+        return config
     },
     (err) => {
         Promise.reject(err);
@@ -32,6 +34,7 @@ service.interceptors.response.use(
         const res = response.data
 
         if (res.code !== 200) {
+
             $message.error(res.message || UNKNOWN_ERROR);
 
             // Illegal token
@@ -56,7 +59,7 @@ service.interceptors.response.use(
     }
 );
 
-export const request = async (config,options)=> {
+export const request = async (config,options = {})=> {
   try {
       /** 当前接口权限, 不需要鉴权的接口请忽略， 格式：sys:user:add */
       /** permCode*/

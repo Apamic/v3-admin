@@ -18,14 +18,14 @@ export function updatePassword(data) {
 
 export function getInfo() {
     return request({
-        url: 'account/info',
+        url: 'user.php',
         method: 'get',
     })
 }
 
 export function permmenu() {
     return request({
-        url: 'account/permmenu',
+        url: 'qx.php',
         method: 'get',
     })
 }

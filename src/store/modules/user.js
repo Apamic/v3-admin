@@ -1,14 +1,16 @@
-import { defineStore } from 'pinia';
-import { store } from '@/store';
-import { Storage } from '@/utils/Storage';
-import { ACCESS_TOKEN_KEY } from '@/enums/cacheEnum';
-import { login } from '@/api/login';
+import {defineStore} from 'pinia';
+import {store} from '@/store';
+import {Storage} from '@/utils/Storage';
+import {ACCESS_TOKEN_KEY} from '@/enums/cacheEnum';
+import {login} from '@/api/login';
+import {getInfo, permmenu} from '@/api/account'
+
 // import { generatorDynamicRouter } from "../../router/generatorRouter";
 
 
 export const useUserStore = defineStore({
     id: 'user',
-    state:() => ({
+    state: () => ({
         token: Storage.get(ACCESS_TOKEN_KEY, null),
         name: 'amdin',
         avatar: '',
@@ -48,8 +50,8 @@ export const useUserStore = defineStore({
 
         async login(params) {
             try {
-                // const { data } = await login(params);
-                // this.setToken(data.token);
+                const {data} = await login(params);
+                this.setToken(data.token);
                 return this.afterLogin();
             } catch (error) {
                 return Promise.reject(error)
@@ -58,53 +60,108 @@ export const useUserStore = defineStore({
 
         async afterLogin() {
             try {
-
-                // const [userInfo, { perms, menus }] = await Promise.all([getInfo(), permmenu()]);
+                debugger
+                const [userInfo, {perms, menus}] = await Promise.all([getInfo(), permmenu()]);
                 // const menus = [
                 //     {
-                //         "createdAt": "2020-08-28 10:09:26",
-                //         "updatedAt": "2021-12-08 14:51:06",
                 //         "id": 1,
                 //         "parentId": null,
-                //         "name": "team",
-                //         "router": "/team",
+                //         "name": "仪表盘",
+                //         "router": "/dashboard",
                 //         "perms": null,
-                //         "type": 0,
-                //         "icon": "icon-shezhi",
-                //         "orderNum": 255,
-                //         "viewPath": null,
-                //         "keepalive": true,
+                //         "type": 1,
+                //         "icon": "",
+                //         "orderNum": 0,
+                //         "viewPath": 'dashboard/index.vue',
+                //         "keepalive": false,
                 //         "isShow": true,
                 //         "isExt": false,
                 //         "openMode": 1
                 //     },
                 //     {
-                //         "createdAt": "2020-10-19 03:07:18",
-                //         "updatedAt": "2023-06-11 10:17:23",
                 //         "id": 2,
-                //         "parentId": 1,
-                //         "name": "team1",
-                //         "router": "/team/team1",
+                //         "parentId": null,
+                //         "name": "选项",
+                //         "router": "/option",
                 //         "perms": null,
                 //         "type": 1,
-                //         "icon": "icon-rizhi1",
+                //         "icon": "",
                 //         "orderNum": 0,
-                //         "viewPath": "/team/team1.vue",
-                //         "keepalive": true,
+                //         "viewPath": "option/option.vue",
+                //         "keepalive": false,
+                //         "isShow": true,
+                //         "isExt": false,
+                //         "openMode": 1
+                //     },
+                //     {
+                //         "id": 3,
+                //         "parentId": null,
+                //         "name": "团队",
+                //         "router": "/team/team1",
+                //         "perms": null,
+                //         "type": 0,
+                //         "icon": "",
+                //         "orderNum": 0,
+                //         "viewPath": "",
+                //         "keepalive": false,
+                //         "isShow": true,
+                //         "isExt": false,
+                //         "openMode": 1
+                //     },
+                //     {
+                //         "id": 4,
+                //         "parentId": 3,
+                //         "name": "团队1",
+                //         "router": "/team",
+                //         "perms": null,
+                //         "type": 1,
+                //         "icon": "",
+                //         "orderNum": 0,
+                //         "viewPath": "team/team1.vue",
+                //         "keepalive": false,
+                //         "isShow": true,
+                //         "isExt": false,
+                //         "openMode": 1
+                //     },
+                //     {
+                //         "id": 5,
+                //         "parentId": 3,
+                //         "name": "团队2",
+                //         "router": "/team/team2",
+                //         "perms": null,
+                //         "type": 0,
+                //         "icon": "",
+                //         "orderNum": 0,
+                //         "viewPath": "",
+                //         "keepalive": false,
+                //         "isShow": true,
+                //         "isExt": false,
+                //         "openMode": 1
+                //     },
+                //         "id": 6,
+                //         "parentId": 5,
+                //         "name": "团队22",
+                //         "router": "/team/team2/team22",
+                //         "perms": null,
+                //         "type": 1,
+                //         "icon": "",
+                //         "orderNum": 0,
+                //         "viewPath": "team/team22.vue",
+                //         "keepalive": false,
                 //         "isShow": true,
                 //         "isExt": false,
                 //         "openMode": 1
                 //     }
                 // ]
-                // this.perms = perms;
-                // this.name = userInfo.name;
-                // this.avatar = userInfo.headImg;
-                // this.userInfo = userInfo;
+                this.perms = perms;
+                this.name = userInfo.name;
+                this.avatar = userInfo.headImg;
+                this.userInfo = userInfo;
                 // 生成路由
-                const generatorResult  = await generatorDynamicRouter(menus);
-                this.menus = generatorResult.menus.filter((item) => !item.meta?.hideInMenu)
+                // const generatorResult  = await generatorDynamicRouter(menus);
+                // this.menus = generatorResult.menus.filter((item) => !item.meta?.hideInMenu)
 
-                return { menus, perms, userInfo };
+                return {menus, perms, userInfo};
             } catch (error) {
                 return Promise.reject(error);
             }
