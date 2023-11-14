@@ -1,7 +1,7 @@
 <template>
     <div class="logo">
         <img src="~@/assets/vue.svg" alt=""/>
-        <h2 v-show="!collapsed" class="title">梅家华</h2>
+<!--        <h2 v-show="!collapsed" class="title">梅家华</h2>-->
     </div>
 </template>
 
@@ -17,13 +17,13 @@ defineProps({
 .logo {
     display: flex;
     align-items: center;
+    justify-content: center;
     height: 64px;
-    padding-left: 12px;
     line-height: 64px;
     //background: rgba(255, 255, 255, 0.3);
     img {
         height: 32px;
-        margin-right: 8px;
+        //margin-right: 8px;
     }
 
     .title {

@@ -1,12 +1,10 @@
 <template>
-    <a-layout-sider :collapsed="collapsed" :trigger="null" collapsible>
-        <a-menu v-model:selectedKeys="state.selectedKeys" theme="dark" mode="inline" collapsible >
-            <template v-for="item in routerList">
-                <menuItem :item="item">
-                </menuItem>
-            </template>
-        </a-menu>
-    </a-layout-sider>
+    <a-menu v-model:selectedKeys="state.selectedKeys" theme="dark" mode="inline" collapsible>
+        <template v-for="item in routerList">
+            <menuItem :item="item">
+            </menuItem>
+        </template>
+    </a-menu>
 </template>
 
 <script setup>
@@ -14,9 +12,7 @@
 import {reactive, ref} from "vue";
 import menuItem from './menuItem.vue'
 
-
 import {useRoute, useRouter} from "vue-router";
-
 
 defineProps({
     collapsed: {
@@ -55,10 +51,6 @@ const state = reactive({
 
 </script>
 
-<style scoped>
-/*.logo {*/
-/*    height: 32px;*/
-/*    background: rgba(255, 255, 255, 0.3);*/
-/*    margin: 16px;*/
-/*}*/
+<style lang="less" scoped>
+
 </style>

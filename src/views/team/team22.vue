@@ -1,5 +1,5 @@
 <template>
-  <div class="page-container">
+  <div class="view-container">
     team22
   </div>
 </template>
@@ -13,9 +13,5 @@ defineOptions({
 </script>
 
 <style lang="less" scoped>
-.page-container {
-  width: 100%;
-  height: 100%;
-  background: white;
-}
+
 </style>

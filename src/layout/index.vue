@@ -1,6 +1,6 @@
 <template>
     <a-layout class="layout">
-        <a-layout-sider collapsible v-model:collapsed="collapsed" :width="asiderWidth">
+        <a-layout-sider class="layout-sider" style="min-height: 100vh;" collapsible v-model:collapsed="collapsed" :width="asiderWidth" :trigger="null">
             <Logo :collapsed="collapsed"></Logo>
             <AsideMenu :collapsed="collapsed"></AsideMenu>
         </a-layout-sider>
@@ -42,8 +42,18 @@ const asiderWidth = computed(() => (collapsed.value ? 80 : 200));
         overflow: hidden;
     }
 
+    .layout-sider {
+        overflow: auto;
+        &::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+        }
+    }
+
     .layout-content {
         flex: none;
+        margin: 24px 16px 0;
+        overflow: inherit;
     }
 }
 
