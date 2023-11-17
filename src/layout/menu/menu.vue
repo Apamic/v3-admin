@@ -1,5 +1,5 @@
 <template>
-    <a-menu v-model:selectedKeys="state.selectedKeys" theme="dark" mode="inline" collapsible>
+    <a-menu v-model:selectedKeys="state.selectedKeys" :open-keys="isSideMenu ? state.openKeys : []" theme="dark" mode="inline" collapsible>
         <template v-for="item in routerList">
             <menuItem :item="item">
             </menuItem>
@@ -9,12 +9,14 @@
 
 <script setup>
 
-import {reactive, ref} from "vue";
+import {reactive, ref, watch} from "vue";
 import menuItem from './menuItem.vue'
 
 import {useRoute, useRouter} from "vue-router";
 
-defineProps({
+const isSideMenu = true
+
+const props = defineProps({
     collapsed: {
         type: Boolean
     }
@@ -33,21 +35,56 @@ const state = reactive({
     routerList: routerList
 })
 
-//const getRouteByName = name => router.getRoutes().find((n) => n.name === name);
-// console.log(currentRoute.meta)
+// 根据activeMenu获取指定的menu
+const getTargetMenuByActiveMenuName = (activeMenu) => {
+    return router.getRoutes().find((n) => [n.name, n.path].includes(activeMenu));
+};
 
-// const clickMenuItem = (key) => {
-//     console.log(key)
-//     if (key === currentRoute.name) return;
-//     const targetRoute = getRouteByName(key);
-//     const {isExt, openMode} = targetRoute?.meta || {};
-//     if (isExt && openMode !== 2) {
-//         window.open(key);
-//     } else {
-//         router.push({name: key});
-//     }
-// };
 
+const getRouteByName = name => router.getRoutes().find((n) => n.name === name);
+console.log(currentRoute.meta)
+
+// 获取当前打开的子菜单
+const getOpenKeys = () => {
+    const meta = currentRoute.meta;
+    if (meta?.activeMenu) {
+        const targetMenu = getTargetMenuByActiveMenuName(meta.activeMenu);
+        return targetMenu?.meta?.namePath ?? [meta?.activeMenu];
+    }
+    return (
+        meta?.hideInMenu
+            ? state?.openKeys || []
+            : currentRoute.meta?.namePath ?? currentRoute.matched.slice(1).map((n) => n.name)
+    )
+}
+
+// 监听菜单收缩状态
+watch(
+    () => props.collapsed,
+    (newVal) => {
+        state.openKeys = newVal ? [] : getOpenKeys();
+        state.selectedKeys = [currentRoute.name]
+    }
+)
+
+// 跟随页面路由变化，切换菜单选中状态
+watch(
+    () => currentRoute.fullPath,
+    () => {
+        if (currentRoute.name === 'LOGIN_NAME' || props.collapsed) return
+        state.openKeys = getOpenKeys();
+        const meta = currentRoute.meta;
+        if (meta?.activeMenu) {
+            const targetMenu = getTargetMenuByActiveMenuName(meta.activeMenu);
+            state.selectedKeys = [targetMenu?.name ?? meta?.activeMenu]
+        } else {
+            state.selectedKeys = [currentRoute.meta?.activeMenu ?? currentRoute.name]
+        }
+    },
+    {
+        immediate:true
+    }
+)
 
 </script>
 
