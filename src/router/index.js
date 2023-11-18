@@ -39,6 +39,9 @@ export const constantRoutes = [
                     type: 0,
                     title: 'team',
                 },
+                redirect: {
+                  name: 'team1'
+                },
                 children: [
                     {
                         path: '/team/team1',
@@ -55,6 +58,9 @@ export const constantRoutes = [
                         meta: {
                             title: 'team2',
                             type: 0
+                        },
+                        redirect: {
+                          name: 'team22'
                         },
                         children: [
                             {

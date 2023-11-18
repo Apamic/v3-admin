@@ -9,7 +9,7 @@ import {resolve} from 'path'
 import vueJsx from '@vitejs/plugin-vue-jsx';
 
 import postcssPresetEnv from "postcss-preset-env" //自动填充浏览器前戳
-import legacy from '@vitejs/plugin-legacy'; //浏览器兼容
+import legacy from '@vitejs/plugin-legacy'; //兼容性
 
 
 
