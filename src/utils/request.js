@@ -5,12 +5,12 @@ import {uniqueSlash} from './urlUtils'
 
 const UNKNOWN_ERROR = '未知错误，请重试'
 
-const baseApiUrl = ''
-const baseMockUrl = ''
+const baseApiUrl = import.meta.env.VITE_BASE_API
+//const baseMockUrl = ''
 
 
 const service = axios.create({
-    baseURL: 'http://job1016.000webhostapp.com',
+    baseURL: baseApiUrl,
     timeout: 6000
 });
 

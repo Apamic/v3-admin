@@ -40,9 +40,7 @@ const getTargetMenuByActiveMenuName = (activeMenu) => {
     return router.getRoutes().find((n) => [n.name, n.path].includes(activeMenu));
 };
 
-
 const getRouteByName = name => router.getRoutes().find((n) => n.name === name);
-console.log(currentRoute.meta)
 
 // 获取当前打开的子菜单
 const getOpenKeys = () => {

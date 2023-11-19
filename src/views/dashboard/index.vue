@@ -105,6 +105,9 @@ import {defineOptions} from "vue";
 defineOptions({
     name: 'index'
 })
+
+// console.log(import.meta.env)
+// console.log(__APP_INFO__)
 </script>
 
 <style lang="less" scoped>

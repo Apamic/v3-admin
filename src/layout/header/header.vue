@@ -24,7 +24,7 @@
             </a-breadcrumb>
         </a-space>
         <a-space size="large">
-            <fullScreen></fullScreen>
+<!--            <fullScreen></fullScreen>-->
         </a-space>
     </a-layout-header>
 </template>
