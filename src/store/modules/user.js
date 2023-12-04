@@ -16,7 +16,9 @@ export const useUserStore = defineStore({
         avatar: '',
         perms: [],
         menus: [],
-        userInfo: {},
+        userInfo: {
+            name: '王磊'
+        },
     }),
     getter: {
         getToken() {
@@ -60,7 +62,7 @@ export const useUserStore = defineStore({
 
         async afterLogin() {
             try {
-                debugger
+                // debugger
                 const [userInfo, {perms, menus}] = await Promise.all([getInfo(), permmenu()]);
                 // const menus = [
                 //     {

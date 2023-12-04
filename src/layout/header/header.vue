@@ -24,7 +24,24 @@
             </a-breadcrumb>
         </a-space>
         <a-space size="large">
-<!--            <fullScreen></fullScreen>-->
+            <!--            <fullScreen></fullScreen>-->
+
+            <a-dropdown  placement="bottomRight">
+                <a-avatar :src="userInfo.headImg" :alt="userInfo.name">{{ userInfo.name }}</a-avatar>
+                <template #overlay>
+                    <a-menu>
+                        <a-menu-item>
+                            {{'个人设置'}}
+                        </a-menu-item>
+                        <a-menu-item>
+                            {{'退出程序'}}
+                        </a-menu-item>
+                    </a-menu>
+
+                </template>
+            </a-dropdown>
+
+            <projectSetting></projectSetting>
         </a-space>
     </a-layout-header>
 </template>
@@ -33,7 +50,9 @@
 import {MenuUnfoldOutlined, MenuFoldOutlined} from '@ant-design/icons-vue';
 import {computed, ref} from "vue";
 import {useRouter, useRoute} from 'vue-router';
+import {useUserStore} from '@/store/modules/user';
 import fullScreen from './components/fullScreen/index.vue';
+import projectSetting from './components/setting.vue';
 
 
 defineProps({
@@ -45,14 +64,18 @@ defineProps({
 const headerStyle = computed(() => {
     return {
         backgroundColor: 'rgba(255, 255, 255, 0.85)',
-        color: 'rgba(255, 255, 255, 0.85)'
+        // color: 'rgba(255, 255, 255, 0.85)'
     }
 })
 
 const emit = defineEmits(['update:collapsed']);
-
+const userStore = useUserStore();
 const router = useRouter();
 const route = useRoute();
+const userInfo = computed(() => userStore.userInfo);
+
+
+
 
 const menus = computed(() => {
     if (route.meta?.namePath) {
@@ -128,7 +151,7 @@ const clickMenuItem = (menuItem) => {
 
 .trigger {
     font-size: 18px;
-    color: #000;
+    //color: #000;
     line-height: 64px;
     transition: color 0.3s;
 }
