@@ -30,11 +30,14 @@
                 <a-avatar :src="userInfo.headImg" :alt="userInfo.name">{{ userInfo.name }}</a-avatar>
                 <template #overlay>
                     <a-menu>
-                        <a-menu-item>
+                        <a-menu-item @click="$router.push({ name: 'account-settings' })">
                             {{'个人设置'}}
                         </a-menu-item>
                         <a-menu-item>
-                            {{'退出程序'}}
+                            <div @click.prevent="onDropOut">
+                                <PoweroffOutlined></PoweroffOutlined>
+                                {{'退出程序'}}
+                            </div>
                         </a-menu-item>
                     </a-menu>
 
@@ -46,13 +49,14 @@
     </a-layout-header>
 </template>
 
-<script setup>
-import {MenuUnfoldOutlined, MenuFoldOutlined} from '@ant-design/icons-vue';
+<script lang="tsx" setup>
+import {MenuUnfoldOutlined, MenuFoldOutlined,PoweroffOutlined,QuestionCircleOutlined } from '@ant-design/icons-vue';
 import {computed, ref} from "vue";
 import {useRouter, useRoute} from 'vue-router';
-import {useUserStore} from '@/store/modules/user';
+import {useUserStore} from '@/store/modules/user.js';
 import fullScreen from './components/fullScreen/index.vue';
 import projectSetting from './components/setting.vue';
+import {Modal,message} from "ant-design-vue";
 
 
 defineProps({
@@ -130,7 +134,20 @@ const clickMenuItem = (menuItem) => {
 
 }
 
-
+const onDropOut = () => {
+    Modal.confirm({
+        title: '您确定要退出登录吗？',
+        icon: <QuestionCircleOutlined />,
+        centered: true,
+        onOk: async () => {
+            if (userStore.userInfo.phone !== '15172364292') {
+                await userStore.logout();
+            }
+            message.success('成功退出登录');
+            console.log(route.fullPath,'fullPath')
+        }
+    })
+}
 </script>
 
 <style lang="less" scoped>

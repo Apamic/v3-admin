@@ -4,7 +4,7 @@ import {Storage} from '@/utils/Storage';
 import {ACCESS_TOKEN_KEY} from '@/enums/cacheEnum';
 import {login} from '@/api/login';
 import {getInfo, permmenu} from '@/api/account'
-
+import { resetRouter } from '@/router';
 // import { generatorDynamicRouter } from "../../router/generatorRouter";
 
 
@@ -170,11 +170,12 @@ export const useUserStore = defineStore({
         },
 
         async logout() {
+            console.log('退出')
             // await logout()
             // const wsStore = useWsStore();
             // wsStore.closeSocket();
-            this.resetToken();
-            resetRouter();
+            // this.resetToken();
+            // resetRouter();
         }
     }
 })

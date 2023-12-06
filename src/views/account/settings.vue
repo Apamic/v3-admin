@@ -1,13 +1,11 @@
 <template>
   <div>
-    settings
+    个人中心
   </div>
 </template>
 
-<script>
-export default {
-  name: "settings"
-}
+<script setup>
+
 </script>
 
 <style lang="less" scoped>
