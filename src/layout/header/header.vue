@@ -25,14 +25,18 @@
         </a-space>
         <a-space size="large">
             <!--            <fullScreen></fullScreen>-->
-
+            <Search></Search>
             <a-dropdown  placement="bottomRight">
                 <a-avatar :src="userInfo.headImg" :alt="userInfo.name">{{ userInfo.name }}</a-avatar>
                 <template #overlay>
                     <a-menu>
+                        <a-menu-item >
+                            {{'关于'}}
+                        </a-menu-item>
                         <a-menu-item @click="$router.push({ name: 'account-settings' })">
                             {{'个人设置'}}
                         </a-menu-item>
+                        <a-menu-divider></a-menu-divider>
                         <a-menu-item>
                             <div @click.prevent="onDropOut">
                                 <PoweroffOutlined></PoweroffOutlined>
@@ -57,6 +61,7 @@ import {useUserStore} from '@/store/modules/user.js';
 import fullScreen from './components/fullScreen/index.vue';
 import projectSetting from './components/setting.vue';
 import {Modal,message} from "ant-design-vue";
+import Search from './components/search/index.vue';
 
 
 defineProps({
@@ -144,7 +149,7 @@ const onDropOut = () => {
                 await userStore.logout();
             }
             message.success('成功退出登录');
-            console.log(route.fullPath,'fullPath')
+            console.log(route.fullPath,'fullPath');
         }
     })
 }

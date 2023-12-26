@@ -11,7 +11,7 @@ export const constantRoutes = [
         redirect: '/dashboard',
         component: () => import('@/layout/index.vue'),
         meta: {
-            title: '首页',
+            title: 'home',
         },
         children: [
             {
