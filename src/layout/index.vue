@@ -52,7 +52,7 @@ const asiderWidth = computed(() => (collapsed.value ? 80 : 200));
 
     .layout-content {
         flex: none;
-        margin: 24px 16px 0;
+        //margin: 24px 16px 0;
         overflow: inherit;
     }
 }

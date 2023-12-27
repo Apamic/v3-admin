@@ -1,5 +1,16 @@
 <template>
     <div class="tabs-view">
+<!--        <Tabs-->
+<!--            :active-key="activeKey"-->
+<!--            hide-add-->
+<!--            type="editable-card"-->
+<!--            class="tabs"-->
+<!--            @change="changePage"-->
+<!--            @edit="editTabItem"-->
+<!--        >-->
+
+<!--        </Tabs>-->
+
         <view class="tabs-view-content">
             <router-view v-slot="{ Component }">
                 <template v-if="Component">
@@ -17,14 +28,24 @@
 </template>
 
 <script setup>
-import { useRoute, useRouter } from 'vue-router';
+import {Dropdown, Tabs, message, Menu} from 'ant-design-vue';
+import {useRoute, useRouter} from 'vue-router';
+import {computed} from "vue";
+import {useTabsViewStore} from '@/store/modules/tabsView';
 
 defineOptions({
-    name:'tabsView'
+    name: 'tabsView'
 })
 
 const route = useRoute();
 const router = useRouter();
+
+// const activeKey = computed(() => tabsViewStore.getCurrentTab?.fullPath);
+//
+// // 标签页列表
+// const tabsList = computed(() => tabsViewStore.getTabsList);
+
+
 
 </script>
 
