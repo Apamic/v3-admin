@@ -1,15 +1,31 @@
 <template>
     <div class="tabs-view">
-<!--        <Tabs-->
-<!--            :active-key="activeKey"-->
-<!--            hide-add-->
-<!--            type="editable-card"-->
-<!--            class="tabs"-->
-<!--            @change="changePage"-->
-<!--            @edit="editTabItem"-->
-<!--        >-->
-
-<!--        </Tabs>-->
+        <Tabs
+            :active-key="activeKey"
+            hide-add
+            type="editable-card"
+            class="tabs"
+            @change="changePage"
+            @edit="editTabItem"
+        >
+            <Tabs.TabPane v-for="pageItem in tabsList" :key="pageItem.fullPath">
+                <template #tab>
+                    <Dropdown>
+                        <div style="display: inline-block">
+                            {{ pageItem.meta?.title }}
+                        </div>
+                        <template #overlay>
+                            <Menu style="user-select: none">
+                                <Menu.Item key="1" :disabled="activeKey !== pageItem.fullPath" @click="reloadPage">
+                                    <reload-outlined/>
+                                    {{ '重新加载' }}
+                                </Menu.Item>
+                            </Menu>
+                        </template>
+                    </Dropdown>
+                </template>
+            </Tabs.TabPane>
+        </Tabs>
 
         <view class="tabs-view-content">
             <router-view v-slot="{ Component }">
@@ -32,9 +48,21 @@
 <script setup>
 import {Dropdown, Tabs, message, Menu} from 'ant-design-vue';
 import {useRoute, useRouter} from 'vue-router';
-import {computed} from "vue";
-import {useTabsViewStore} from '@/store/modules/tabsView';
+import {computed, watch} from "vue";
+import {TABS_ROUTES} from '@/enums/cacheEnum';
+import {useTabsViewStore, blackList} from '@/store/modules/tabsView';
 import {useKeepAliveStore} from '@/store/modules/keepAlive';
+import {
+    DownOutlined,
+    ReloadOutlined,
+    CloseOutlined,
+    VerticalRightOutlined,
+    VerticalLeftOutlined,
+    ColumnWidthOutlined,
+    MinusOutlined,
+} from '@ant-design/icons-vue';
+import { Storage } from '@/utils/Storage';
+
 
 defineOptions({
     name: 'tabsView'
@@ -50,10 +78,49 @@ const activeKey = computed(() => tabsViewStore.getCurrentTab?.fullPath);
 
 // 标签页列表
 const tabsList = computed(() => tabsViewStore.getTabsList);
-console.log(tabsList.value,'tabsList')
 
 // 缓存的路由组件列表
 const keepAliveComponents = computed(() => keepAliveStore.list);
+
+// 获取简易的路由对象
+const getSimpleRoute = (route) => {
+    const {fullPath, hash, meta, name, params, path, query} = route;
+    return {fullPath, hash, meta, name, params, path, query};
+};
+
+let routes = []
+
+try {
+    const routesStr = Storage.get(TABS_ROUTES);
+    routes = routesStr ? JSON.parse(routesStr) : [getSimpleRoute(route)];
+} catch (e) {
+    routes = [getSimpleRoute(route)];
+}
+
+// 初始化标签页
+tabsViewStore.initTabs(routes);
+
+watch(
+    () => route.fullPath,
+    () => {
+        if (blackList.some((n) => n === route.name)) {
+            return
+        }
+        tabsViewStore.addTabs(getSimpleRoute(route));
+        console.log(keepAliveComponents.value)
+    },
+    {immediate: true},
+);
+
+// 在页面关闭或刷新之前，保存数据
+window.addEventListener('beforeunload', () => {
+    Storage.set(TABS_ROUTES, JSON.stringify(tabsList.value));
+});
+
+// 目标路由是否等于当前路由
+const isCurrentRoute = (route) => {
+    return router.currentRoute.value.matched.some((item) => item.name === route.name);
+};
 
 
 // 关闭当前页面
@@ -63,6 +130,8 @@ const removeTab = (route) => {
     }
     tabsViewStore.closeCurrentTab(route);
 }
+
+console.log(route.fullPath)
 
 // 切换页面
 const changePage = (key) => {
@@ -75,11 +144,22 @@ const editTabItem = (targetKey, action) => {
     }
 }
 
+
+// 刷新页面
+const reloadPage = () => {
+
+};
+
 </script>
 
 <style lang="less" scoped>
 .tabs-view {
     border-top: 1px solid #eee;
+    .tabs {
+        margin: 0;
+        padding: 4px 20px 0 10px;
+        background: #fff;
+    }
     .tabs-view-content {
         /* height: calc(100vh - #{$header-height}); */
         //height: calc(100vh - 110px);

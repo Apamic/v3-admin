@@ -33,7 +33,6 @@ const currentRoute = useRoute();
 const getRouteByName = name => router.getRoutes().find((n) => n.name === name);
 
 const clickMenuItem = (key) => {
-
     if (key === currentRoute.name) return;
     const targetRoute = getRouteByName(key);
     const {isExt, openMode} = targetRoute?.meta || {};

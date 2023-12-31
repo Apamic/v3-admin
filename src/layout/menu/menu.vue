@@ -49,6 +49,7 @@ const getOpenKeys = () => {
         const targetMenu = getTargetMenuByActiveMenuName(meta.activeMenu);
         return targetMenu?.meta?.namePath ?? [meta?.activeMenu];
     }
+
     return (
         meta?.hideInMenu
             ? state?.openKeys || []

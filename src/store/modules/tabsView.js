@@ -13,9 +13,7 @@ export const blackList = [];
 export const useTabsViewStore = defineStore({
     id: 'tabs-view',
     state: () => ({
-        tabsList: [
-            ...router.options.routes[0].children
-        ],
+        tabsList: [],
     }),
     getters: {
         getTabsList: (state) => {
@@ -25,8 +23,8 @@ export const useTabsViewStore = defineStore({
         },
         /** 当前activity tab */
         getCurrentTab: (state) => {
-            const currentRoute = route.currentRoute.value;
-
+            const currentRoute = router.currentRoute.value;
+            //console.log(currentRoute,'currentRoute')
             return state.tabsList.find((item) => {
                 return !item.meta?.hideInTabs && item.fullPath === currentRoute.fullPath;
             })
@@ -55,9 +53,9 @@ export const useTabsViewStore = defineStore({
 
         /** 添加标签页 */
         addTabs(route) {
-            if (blackList.include(route.name)) return false;
+            if (blackList.includes(route.name)) return false;
             const isExists = this.tabsList.some((item) => item.fullPath == route.fullPath);
-            if (isExists) {
+            if (!isExists) {
                 this.tabsList.push(route);
             }
             return true;
