@@ -61,7 +61,7 @@ import {
     ColumnWidthOutlined,
     MinusOutlined,
 } from '@ant-design/icons-vue';
-import { Storage } from '@/utils/Storage';
+import {Storage} from '@/utils/storage';
 
 
 defineOptions({
@@ -129,9 +129,7 @@ const removeTab = (route) => {
         return message.warning('这已经是最后一页，不能再关闭了！');
     }
     tabsViewStore.closeCurrentTab(route);
-}
-
-console.log(route.fullPath)
+};
 
 // 切换页面
 const changePage = (key) => {
@@ -155,11 +153,13 @@ const reloadPage = () => {
 <style lang="less" scoped>
 .tabs-view {
     border-top: 1px solid #eee;
+
     .tabs {
         margin: 0;
         padding: 4px 20px 0 10px;
         background: #fff;
     }
+
     .tabs-view-content {
         /* height: calc(100vh - #{$header-height}); */
         //height: calc(100vh - 110px);

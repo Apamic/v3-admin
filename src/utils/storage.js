@@ -21,7 +21,7 @@ export const createStorage = (prefixKey = '', storage = localStorage) => {
         }
 
         get(key,def = null) {
-            const item = this.storage.getItem(this.getKey());
+            const item = this.storage.getItem(this.getKey(key));
             if (item) {
                 try {
                     const data = JSON.parse(item);
