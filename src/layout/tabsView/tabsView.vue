@@ -1,31 +1,47 @@
 <template>
     <div class="tabs-view">
-        <Tabs
-            :active-key="activeKey"
-            hide-add
-            type="editable-card"
-            class="tabs"
-            @change="changePage"
-            @edit="editTabItem"
-        >
-            <Tabs.TabPane v-for="pageItem in tabsList" :key="pageItem.fullPath">
-                <template #tab>
-                    <Dropdown>
-                        <div style="display: inline-block">
-                            {{ pageItem.meta?.title }}
-                        </div>
-                        <template #overlay>
-                            <Menu style="user-select: none">
-                                <Menu.Item key="1" :disabled="activeKey !== pageItem.fullPath" @click="reloadPage">
-                                    <reload-outlined/>
-                                    {{ '重新加载' }}
-                                </Menu.Item>
-                            </Menu>
-                        </template>
-                    </Dropdown>
-                </template>
-            </Tabs.TabPane>
-        </Tabs>
+<!--        <div class="tabs-list">-->
+            <Tabs
+                :active-key="activeKey"
+                hide-add
+                type="editable-card"
+                class="tabs"
+                @change="changePage"
+                @edit="editTabItem"
+            >
+                <Tabs.TabPane v-for="pageItem in tabsList" :key="pageItem.fullPath">
+                    <template #tab>
+                        <Dropdown>
+                            <div style="display: inline-block">
+                                {{ pageItem.meta?.title }}
+                            </div>
+    <!--                        <template #overlay>-->
+    <!--                            <Menu style="user-select: none">-->
+    <!--                                <Menu.Item key="1" :disabled="activeKey !== pageItem.fullPath" @click="reloadPage">-->
+    <!--                                    <reload-outlined/>-->
+    <!--                                    {{ '重新加载' }}-->
+    <!--                                </Menu.Item>-->
+    <!--                            </Menu>-->
+    <!--                        </template>-->
+                        </Dropdown>
+                    </template>
+                </Tabs.TabPane>
+<!--                <div>-->
+<!--                    <Dropdown>-->
+<!--                        <DownOutlined />-->
+<!--                        <template #overlay>-->
+<!--                            <Menu style="user-select: none">-->
+<!--                                <Menu.Item key="1"  @click="reloadPage">-->
+<!--                                    <reload-outlined/>-->
+<!--                                    {{ '重新加载' }}-->
+<!--                                </Menu.Item>-->
+<!--                            </Menu>-->
+<!--                        </template>-->
+<!--                    </Dropdown>-->
+<!--                </div>-->
+            </Tabs>
+
+<!--        </div>-->
 
         <view class="tabs-view-content">
             <router-view v-slot="{ Component }">
@@ -154,10 +170,17 @@ const reloadPage = () => {
 .tabs-view {
     border-top: 1px solid #eee;
 
-    .tabs {
-        margin: 0;
+    .tabs-list {
+        display: flex;
+        align-items: center;
         padding: 4px 20px 0 10px;
-        background: #fff;
+        background: #ffffff;
+
+    }
+
+    .tabs {
+        //flex: 1;
+        background: #ffffff;
     }
 
     .tabs-view-content {

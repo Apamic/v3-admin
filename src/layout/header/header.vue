@@ -7,8 +7,8 @@
             </span>
 
             <a-breadcrumb>
-                <template v-for="(routeItem,rotueIndex) in menus" :key="routeItem.name">
-                    <a-breadcrumb-item>
+                <template v-for="(routeItem,rotueIndex) in menus" :key="routeItem.name" >
+                    <a-breadcrumb-item v-if="routeItem?.name != 'Layout'">
                         <span>{{ routeItem?.meta?.title }}</span>
                         <template v-if="routeItem?.children?.length" #overlay>
                             <a-menu :selected-keys="getSelectKeys(rotueIndex)">
@@ -26,6 +26,7 @@
         <a-space size="large">
             <!--            <fullScreen></fullScreen>-->
             <Search></Search>
+            <Notify></Notify>
             <a-dropdown  placement="bottomRight">
                 <a-avatar :src="userInfo.headImg" :alt="userInfo.name">{{ userInfo.name }}</a-avatar>
                 <template #overlay>
@@ -55,14 +56,14 @@
 
 <script lang="tsx" setup>
 import {MenuUnfoldOutlined, MenuFoldOutlined,PoweroffOutlined,QuestionCircleOutlined } from '@ant-design/icons-vue';
-import {computed, ref} from "vue";
+import {computed, nextTick, ref} from "vue";
 import {useRouter, useRoute} from 'vue-router';
 import {useUserStore} from '@/store/modules/user.js';
 import fullScreen from './components/fullScreen/index.vue';
 import projectSetting from './components/setting.vue';
 import {Modal,message} from "ant-design-vue";
 import Search from './components/search/index.vue';
-
+import Notify from './components/notify/index.vue';
 
 defineProps({
     collapsed: {
@@ -93,6 +94,7 @@ const menus = computed(() => {
     return route.matched;
 })
 
+console.log(menus.value)
 
 const getSelectKeys = (rotueIndex) => {
     return [menus.value[rotueIndex + 1]?.name]
@@ -148,8 +150,15 @@ const onDropOut = () => {
             if (userStore.userInfo.phone !== '15172364292') {
                 await userStore.logout();
             }
+            localStorage.clear();
             message.success('成功退出登录');
-            console.log(route.fullPath,'fullPath');
+            await nextTick();
+            router.replace({
+                name: LOGIN_NAME,
+                query: {
+                    redirect: route.fullPath,
+                }
+            })
         }
     })
 }
