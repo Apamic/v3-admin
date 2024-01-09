@@ -27,27 +27,28 @@
             <!--            <fullScreen></fullScreen>-->
             <Search></Search>
             <Notify></Notify>
-            <a-dropdown  placement="bottomRight">
-                <a-avatar :src="userInfo.headImg" :alt="userInfo.name">{{ userInfo.name }}</a-avatar>
-                <template #overlay>
-                    <a-menu>
-                        <a-menu-item >
-                            {{'关于'}}
-                        </a-menu-item>
-                        <a-menu-item @click="$router.push({ name: 'account-settings' })">
-                            {{'个人设置'}}
-                        </a-menu-item>
-                        <a-menu-divider></a-menu-divider>
-                        <a-menu-item>
-                            <div @click.prevent="onDropOut">
-                                <PoweroffOutlined></PoweroffOutlined>
-                                {{'退出程序'}}
-                            </div>
-                        </a-menu-item>
-                    </a-menu>
+            <UserDropdown></UserDropdown>
+<!--            <a-dropdown  placement="bottomRight">-->
+<!--                <a-avatar :src="userInfo.headImg" :alt="userInfo.name">{{ userInfo.name }}</a-avatar>-->
+<!--                <template #overlay>-->
+<!--                    <a-menu>-->
+<!--                        <a-menu-item >-->
+<!--                            {{'关于'}}-->
+<!--                        </a-menu-item>-->
+<!--                        <a-menu-item @click="$router.push({ name: 'account-settings' })">-->
+<!--                            {{'个人设置'}}-->
+<!--                        </a-menu-item>-->
+<!--                        <a-menu-divider></a-menu-divider>-->
+<!--                        <a-menu-item>-->
+<!--                            <div @click.prevent="onDropOut">-->
+<!--                                <PoweroffOutlined></PoweroffOutlined>-->
+<!--                                {{'退出程序'}}-->
+<!--                            </div>-->
+<!--                        </a-menu-item>-->
+<!--                    </a-menu>-->
 
-                </template>
-            </a-dropdown>
+<!--                </template>-->
+<!--            </a-dropdown>-->
 
             <projectSetting></projectSetting>
         </a-space>
@@ -64,6 +65,7 @@ import projectSetting from './components/setting.vue';
 import {Modal,message} from "ant-design-vue";
 import Search from './components/search/index.vue';
 import Notify from './components/notify/index.vue';
+import UserDropdown from './components/userDropdown/index.vue'
 
 defineProps({
     collapsed: {
