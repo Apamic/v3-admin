@@ -1,6 +1,6 @@
 <template>
-    <a-layout-header class="layout-header" :style="headerStyle">
-        <a-space size="large">
+    <Layout.Header class="layout-header" :style="headerStyle">
+        <Space size="large">
 
             <span class="trigger" @click="() => emit('update:collapsed', !collapsed)">
                <component :is="collapsed ? MenuUnfoldOutlined : MenuFoldOutlined"/>
@@ -22,8 +22,8 @@
                     </a-breadcrumb-item>
                 </template>
             </a-breadcrumb>
-        </a-space>
-        <a-space size="large">
+        </Space>
+        <Space size="large">
             <!--            <fullScreen></fullScreen>-->
             <Search></Search>
             <Notify></Notify>
@@ -51,8 +51,8 @@
 <!--            </a-dropdown>-->
 
             <projectSetting></projectSetting>
-        </a-space>
-    </a-layout-header>
+        </Space>
+    </Layout.Header>
 </template>
 
 <script lang="tsx" setup>
@@ -62,7 +62,7 @@ import {useRouter, useRoute} from 'vue-router';
 import {useUserStore} from '@/store/modules/user.js';
 import fullScreen from './components/fullScreen/index.vue';
 import projectSetting from './components/setting.vue';
-import {Modal,message} from "ant-design-vue";
+import {Modal,message,Layout,Space} from "ant-design-vue";
 import Search from './components/search/index.vue';
 import Notify from './components/notify/index.vue';
 import UserDropdown from './components/userDropdown/index.vue'
@@ -76,6 +76,8 @@ defineProps({
 const headerStyle = computed(() => {
     return {
         backgroundColor: 'rgba(255, 255, 255, 0.85)',
+        // height: '48px',
+        // lineHight: '48px',
         // color: 'rgba(255, 255, 255, 0.85)'
     }
 })
@@ -176,7 +178,8 @@ const onDropOut = () => {
     align-items: center;
     justify-content: space-between;
     padding: 0 24px;
-
+    height: 48px;
+    line-height: 48px;
     * {
         cursor: pointer;
     }
