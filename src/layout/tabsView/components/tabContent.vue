@@ -1,0 +1,88 @@
+<template>
+    <Dropdown placement="bottomLeft">
+        <span class="redo">
+            <DownOutlined />
+        </span>
+        <template #overlay>
+            <Menu >
+                <Menu.Item key="1"  @click="reloadPage">
+                    <ReloadOutlined/>
+                    {{ '重新加载' }}
+                </Menu.Item>
+                <Menu.Item key="2"  @click="removeTab">
+                    <CloseOutlined/>
+                    {{ '关闭标签页' }}
+                </Menu.Item>
+                <Menu.Divider />
+                <Menu.Item key="3" @click="closeLeft">
+                    <VerticalRightOutlined />
+                    {{ '关闭左侧标签页' }}
+                </Menu.Item>
+                <Menu.Item key="4" @click="closeRight">
+                    <VerticalLeftOutlined />
+                    {{ '关闭右侧标签页' }}
+                </Menu.Item>
+                <Menu.Divider />
+                <Menu.Item key="5" @click="closeOther">
+                    <ColumnWidthOutlined />
+                    {{ '关闭其他标签页' }}
+                </Menu.Item>
+                <Menu.Item key="6" @click="closeAll">
+                    <MinusOutlined />
+                    {{ '关闭全部标签页' }}
+                </Menu.Item>
+            </Menu>
+        </template>
+    </Dropdown>
+</template>
+
+<script setup>
+import {Dropdown,Menu} from 'ant-design-vue';
+import {defineOptions} from "vue";
+import {
+    DownOutlined,
+    ReloadOutlined,
+    CloseOutlined,
+    VerticalRightOutlined,
+    VerticalLeftOutlined,
+    ColumnWidthOutlined,
+    MinusOutlined,
+} from '@ant-design/icons-vue';
+
+
+defineOptions({
+    name: "tabContent"
+})
+
+const reloadPage = () => {
+
+}
+
+const removeTab = () => {
+
+}
+
+const closeLeft = () => {
+
+}
+
+const closeRight = () => {}
+
+const closeOther = () => {}
+
+const closeAll = () => {}
+
+</script>
+
+<style lang="less" scoped>
+.redo {
+    display: inline-block;
+    width: 36px;
+    height: 30px;
+    border-left: 1px solid #eee;
+    color: #8b949e;
+    line-height: 30px;
+    text-align: center;
+    cursor: pointer;
+}
+</style>

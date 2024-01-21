@@ -5,6 +5,7 @@
                 :active-key="activeKey"
                 hide-add
                 size="small"
+                :animated="false"
                 type="editable-card"
                 :tabBarGutter="3"
                 class="tabs"
@@ -18,9 +19,9 @@
                                 {{ pageItem.meta?.title }}
                             </div>
                         </template>
-                        <template #rightExtra>
-                            <TabRedo></TabRedo>
-                        </template>
+<!--                        <template #rightExtra>-->
+<!--                            <TabRedo></TabRedo>-->
+<!--                        </template>-->
 <!--                        <Dropdown>-->
 <!--                            <div style="display: inline-block">-->
 <!--                                {{ pageItem.meta?.title }}-->
@@ -50,6 +51,13 @@
 <!--                        </template>-->
 <!--                    </Dropdown>-->
 <!--                </div>-->
+
+                <template #rightExtra>
+                    <TabContent></TabContent>
+                    <TabRedo></TabRedo>
+<!--                    <TabContent></TabContent>-->
+                </template>
+
             </Tabs>
 
 <!--        </div>-->
@@ -80,6 +88,7 @@ import {TABS_ROUTES} from '@/enums/cacheEnum';
 import {useTabsViewStore, blackList} from '@/store/modules/tabsView';
 import {useKeepAliveStore} from '@/store/modules/keepAlive';
 import TabRedo from './components/tabRedo.vue';
+import TabContent from './components/tabContent.vue';
 import {
     DownOutlined,
     ReloadOutlined,

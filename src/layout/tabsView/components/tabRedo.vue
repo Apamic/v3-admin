@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import {defineOptions} from "vue";
+import {defineOptions,ref} from "vue";
 import {RedoOutlined} from '@ant-design/icons-vue';
 
 
@@ -22,7 +22,7 @@ const loading = ref(false);
     display: inline-block;
     width: 36px;
     height: 30px;
-    /*border-left: 1px solid var(--border-color);*/
+    border-left: 1px solid #eee;
     color: #8b949e;
     line-height: 30px;
     text-align: center;
