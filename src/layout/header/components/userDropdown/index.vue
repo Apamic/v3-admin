@@ -30,6 +30,8 @@ import {useUserStore} from '@/store/modules/user.js';
 import {Dropdown, Menu, message, Modal} from 'ant-design-vue';
 import {computed, nextTick} from "vue";
 import {useRoute, useRouter} from "vue-router";
+import { LOGIN_NAME } from '@/enums/routerEnum';
+
 
 const router = useRouter();
 const route = useRoute();

@@ -9,4 +9,4 @@ export const asyncRoutes = Object.entries(modulesFiles).reduce(
     }
 },{})
 
-console.log('asyncRoutes', asyncRoutes);
+// console.log('asyncRoutes', asyncRoutes);

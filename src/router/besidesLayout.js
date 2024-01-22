@@ -1,7 +1,7 @@
-import RouterView from '@/layout';
+import RouterView from '@/layout/routerView/index.vue';
 import router from '@/router';
 
-const REDIRECT_NAME = 'Redirect'
+import { REDIRECT_NAME } from '@/enums/routerEnum';
 
 /**
  * 主要用于刷新当前页面

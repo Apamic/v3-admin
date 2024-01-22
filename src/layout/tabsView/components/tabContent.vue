@@ -38,7 +38,11 @@
 
 <script setup>
 import {Dropdown,Menu} from 'ant-design-vue';
-import {defineOptions} from "vue";
+import {defineOptions, unref} from "vue";
+import { useRoute, useRouter } from 'vue-router';
+import { useTabsViewStore, blackList } from '@/store/modules/tabsView';
+import {useKeepAliveStore} from '@/store/modules/keepAlive';
+import { REDIRECT_NAME } from '@/enums/routerEnum';
 import {
     DownOutlined,
     ReloadOutlined,
@@ -54,8 +58,17 @@ defineOptions({
     name: "tabContent"
 })
 
+const route = useRoute();
+const router = useRouter();
+// console.log(route.fullPath)
+console.log(REDIRECT_NAME)
 const reloadPage = () => {
-
+    router.replace({
+        name: REDIRECT_NAME,
+        params: {
+            path: unref(route).fullPath,
+        },
+    });
 }
 
 const removeTab = () => {

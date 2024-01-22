@@ -1,4 +1,4 @@
-import RouterView from '@/layout/index.vue'
+import RouterView from '@/layout/routerView/index.vue';
 
 const moduleName = 'account';
 

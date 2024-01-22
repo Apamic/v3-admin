@@ -1,69 +1,32 @@
 <template>
     <div class="tabs-view">
-<!--        <div class="tabs-list">-->
-            <Tabs
-                :active-key="activeKey"
-                hide-add
-                size="small"
-                :animated="false"
-                type="editable-card"
-                :tabBarGutter="3"
-                class="tabs"
-                @change="changePage"
-                @edit="editTabItem"
-            >
-                <template v-for="pageItem in tabsList" :key="pageItem.fullPath">
-                    <Tabs.TabPane>
-                        <template #tab>
-                            <div style="display: inline-block">
-                                {{ pageItem.meta?.title }}
-                            </div>
-                        </template>
-<!--                        <template #rightExtra>-->
-<!--                            <TabRedo></TabRedo>-->
-<!--                        </template>-->
-<!--                        <Dropdown>-->
-<!--                            <div style="display: inline-block">-->
-<!--                                {{ pageItem.meta?.title }}-->
-<!--                            </div>-->
-<!--                            <template #overlay>-->
-<!--                                <Menu style="user-select: none">-->
-<!--                                    <Menu.Item key="1" :disabled="activeKey !== pageItem.fullPath" @click="reloadPage">-->
-<!--                                        <reload-outlined/>-->
-<!--                                        {{ '重新加载' }}-->
-<!--                                    </Menu.Item>-->
-<!--                                </Menu>-->
-<!--                            </template>-->
-<!--                        </Dropdown>-->
 
-                    </Tabs.TabPane>
-                </template>
-<!--                <div>-->
-<!--                    <Dropdown>-->
-<!--                        <DownOutlined />-->
-<!--                        <template #overlay>-->
-<!--                            <Menu style="user-select: none">-->
-<!--                                <Menu.Item key="1"  @click="reloadPage">-->
-<!--                                    <reload-outlined/>-->
-<!--                                    {{ '重新加载' }}-->
-<!--                                </Menu.Item>-->
-<!--                            </Menu>-->
-<!--                        </template>-->
-<!--                    </Dropdown>-->
-<!--                </div>-->
-
-                <template #rightExtra>
-                    <TabContent></TabContent>
-                    <TabRedo></TabRedo>
-<!--                    <TabContent></TabContent>-->
-
-
-                </template>
-
-            </Tabs>
-
-<!--        </div>-->
-
+        <Tabs
+            :active-key="activeKey"
+            hide-add
+            size="small"
+            :animated="false"
+            type="editable-card"
+            :tabBarGutter="3"
+            class="tabs"
+            @change="changePage"
+            @edit="editTabItem"
+        >
+            <template v-for="pageItem in tabsList" :key="pageItem.fullPath">
+                <Tabs.TabPane>
+                    <template #tab>
+                        <div style="display: inline-block">
+                            {{ pageItem.meta?.title }}
+                        </div>
+                    </template>
+                </Tabs.TabPane>
+            </template>
+            <template #rightExtra>
+                <TabContent></TabContent>
+                <TabRedo></TabRedo>
+                <!--<TabContent></TabContent>-->
+            </template>
+        </Tabs>
         <view class="tabs-view-content">
             <router-view v-slot="{ Component }">
                 <template v-if="Component">
@@ -91,15 +54,7 @@ import {useTabsViewStore, blackList} from '@/store/modules/tabsView';
 import {useKeepAliveStore} from '@/store/modules/keepAlive';
 import TabRedo from './components/tabRedo.vue';
 import TabContent from './components/tabContent.vue';
-import {
-    DownOutlined,
-    ReloadOutlined,
-    CloseOutlined,
-    VerticalRightOutlined,
-    VerticalLeftOutlined,
-    ColumnWidthOutlined,
-    MinusOutlined,
-} from '@ant-design/icons-vue';
+
 import {Storage} from '@/utils/storage';
 
 
@@ -146,7 +101,7 @@ watch(
             return
         }
         tabsViewStore.addTabs(getSimpleRoute(route));
-        console.log(keepAliveComponents.value)
+        console.log(keepAliveComponents.value,'keepAliveComponents')
     },
     {immediate: true},
 );

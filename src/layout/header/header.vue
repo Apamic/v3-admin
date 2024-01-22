@@ -93,12 +93,12 @@ const userInfo = computed(() => userStore.userInfo);
 
 const menus = computed(() => {
     if (route.meta?.namePath) {
-        console.log(route.meta.namePath)
+        // console.log(route.meta.namePath)
     }
     return route.matched;
 })
 
-console.log(menus.value)
+console.log(menus.value,'menus')
 
 const getSelectKeys = (rotueIndex) => {
     return [menus.value[rotueIndex + 1]?.name]
