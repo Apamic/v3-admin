@@ -1,8 +1,8 @@
 import RouterView from '@/layout/index.vue'
+import {PAGE_NOT_FOUND_NAME} from '@/enums/routerEnum';
+
 
 const moduleName = 'error';
-
-const PAGE_NOT_FOUND_NAME = 'PageNotFound';
 
 export const notFound = {
     path: '/:pathMatch(.*)*',

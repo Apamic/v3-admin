@@ -1,8 +1,10 @@
 import { createRouter,createWebHistory } from 'vue-router'
-
+import {WHITE_NAME_LIST} from '@/enums/routerEnum';
 import outsideLayout from './outsideLayout'
-
+import { createRouterGuards } from './routerGuards';
 // import Layout from '@/layout/index.vue'
+import { REDIRECT_ROUTE } from './besidesLayout';
+
 
 export const constantRoutes = [
     {
@@ -76,6 +78,9 @@ export const constantRoutes = [
                     }
                 ]
             },
+
+
+            REDIRECT_ROUTE
         ],
     },
 
@@ -91,7 +96,7 @@ const router = createRouter({
 export function resetRouter() {
     router.getRoutes().forEach((route) => {
         const { name } = route
-        if (name && !whiteNameList.some((n) => n === name)) {
+        if (name && !WHITE_NAME_LIST.some((n) => n === name)) {
             router.hasRoute(name) && router.removeRoute(name);
         }
     })
@@ -100,7 +105,7 @@ export function resetRouter() {
 
 export async function setupRouter(app) {
     // 创建路由守卫
-    //createRouterGuards(router, whiteNameList);
+    createRouterGuards(router, WHITE_NAME_LIST);
 
     app.use(router)
 

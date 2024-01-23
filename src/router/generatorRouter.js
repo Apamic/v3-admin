@@ -7,9 +7,10 @@ import common from '@/router/staticModules';
 import { notFound, errorRoute } from './staticModules/error';
 import outsideLayout from './outsideLayout';
 import {asyncRoutes} from "./asyncModules";
+import { REDIRECT_ROUTE } from './besidesLayout';
 
 // 需要放在所有路由之后的路由
-const endRoutes = [errorRoute, notFound];
+const endRoutes = [REDIRECT_ROUTE,errorRoute, notFound];
 
 export function filterAsyncRoute (routes,parentRoute,lastNamePath) {
     return routes
@@ -93,7 +94,7 @@ export const generatorDynamicRouter = (asyncMenus) => {
         // console.log(routeList, '根据后端返回的权限路由生成');
         // 给公共路由添加namePath
         generatorNamePath(common);
-        const menus = [...common,...routeList];
+        const menus = [...common,...routeList,...endRoutes];
         layout.children = menus;
         const removeRoute = router.addRoute(layout);
         // 获取所有没有包含children的路由，上面addRoute的时候，vue-router已经帮我们拍平了所有路由
