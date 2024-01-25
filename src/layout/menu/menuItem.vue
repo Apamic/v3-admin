@@ -7,7 +7,7 @@
             <menuItem :item="items"></menuItem>
         </template>
     </a-sub-menu>
-    <a-menu-item :key="item.name" v-else @click="clickMenuItem(item.name)">
+    <a-menu-item :key="item.name" v-else @click="clickMenuItem(item.name)" v-bind="$attrs">
         <menuItemContent :item="item"></menuItemContent>
     </a-menu-item>
 </template>

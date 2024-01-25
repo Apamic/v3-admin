@@ -105,7 +105,7 @@ export function resetRouter() {
 
 export async function setupRouter(app) {
     // 创建路由守卫
-    createRouterGuards(router, WHITE_NAME_LIST);
+    //createRouterGuards(router, WHITE_NAME_LIST);
 
     app.use(router)
 

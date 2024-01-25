@@ -24,7 +24,6 @@
             <template #rightExtra>
                 <TabContent></TabContent>
                 <TabRedo></TabRedo>
-                <!--<TabContent></TabContent>-->
             </template>
         </Tabs>
         <view class="tabs-view-content">
@@ -71,7 +70,7 @@ const keepAliveStore = useKeepAliveStore();
 const activeKey = computed(() => tabsViewStore.getCurrentTab?.fullPath);
 
 // 标签页列表
-const tabsList = computed(() => tabsViewStore.getTabsList);
+const tabsList = computed(() => tabsViewStore.getTabsList.filter((item) => !item.meta?.hideInTabs));
 
 // 缓存的路由组件列表
 const keepAliveComponents = computed(() => keepAliveStore.list);
@@ -106,6 +105,8 @@ watch(
     {immediate: true},
 );
 
+
+console.log(tabsList.value,'tabsList')
 // 在页面关闭或刷新之前，保存数据
 window.addEventListener('beforeunload', () => {
     Storage.set(TABS_ROUTES, JSON.stringify(tabsList.value));

@@ -1,7 +1,7 @@
 <template>
     <a-menu v-model:selectedKeys="state.selectedKeys" :open-keys="isSideMenu ? state.openKeys : []" theme="dark" mode="inline" collapsible>
-        <template v-for="item in routerList">
-            <menuItem :item="item">
+        <template v-for="item in filterMenus" :key="item.fullPath">
+            <menuItem :item="item" >
             </menuItem>
         </template>
     </a-menu>
@@ -9,7 +9,7 @@
 
 <script setup>
 
-import {reactive, ref, watch} from "vue";
+import {reactive, ref, watch,computed} from "vue";
 import menuItem from './menuItem.vue'
 
 import {useRoute, useRouter} from "vue-router";
@@ -27,7 +27,11 @@ const router = useRouter();
 
 const routerList = router.options.routes[0].children
 //console.log(routerList, 'routerList')
-
+const filterMenus = computed(() => {
+    return [...routerList]
+        .filter((n) => !n.meta?.hideInMenu)
+        // .sort((a, b) => (a?.meta?.orderNum || 0) - (b?.meta?.orderNum || 0));
+});
 
 const state = reactive({
     selectedKeys: [],

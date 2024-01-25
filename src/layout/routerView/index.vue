@@ -4,7 +4,7 @@
 
 <script>
 export default {
-    name: 'LayoutParentView'
+    name: 'Redirect'
 }
 </script>
 

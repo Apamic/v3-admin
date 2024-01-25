@@ -5,7 +5,7 @@
         </span>
         <template #overlay>
             <Menu >
-                <Menu.Item key="1"  @click="reloadPage">
+                <Menu.Item key="1" :disabled="activeKey !== route.fullPath"  @click="reloadPage">
                     <ReloadOutlined/>
                     {{ '重新加载' }}
                 </Menu.Item>
@@ -38,7 +38,7 @@
 
 <script setup>
 import {Dropdown,Menu} from 'ant-design-vue';
-import {defineOptions, unref} from "vue";
+import {defineOptions, unref,computed} from "vue";
 import { useRoute, useRouter } from 'vue-router';
 import { useTabsViewStore, blackList } from '@/store/modules/tabsView';
 import {useKeepAliveStore} from '@/store/modules/keepAlive';
@@ -60,8 +60,13 @@ defineOptions({
 
 const route = useRoute();
 const router = useRouter();
+
+const tabsViewStore = useTabsViewStore();
 // console.log(route.fullPath)
 console.log(REDIRECT_NAME)
+
+const activeKey = computed(() => tabsViewStore.getCurrentTab?.fullPath);
+
 const reloadPage = () => {
     router.replace({
         name: REDIRECT_NAME,

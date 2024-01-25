@@ -22,7 +22,8 @@ export const REDIRECT_ROUTE = {
             component: RouterView,
             meta: {
                 title: REDIRECT_NAME,
-                hideInMenu: true,
+                hideInBreadcrumb: true,
+                hideInTabs: true
             },
             beforeEnter: (to) => {
                 const {params, query} = to
