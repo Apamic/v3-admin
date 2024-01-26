@@ -7,7 +7,7 @@
             </span>
 
             <a-breadcrumb>
-                <template v-for="(routeItem,rotueIndex) in menus" :key="routeItem.name" >
+                <template v-for="(routeItem,rotueIndex) in menus" :key="routeItem.fullPath" >
                     <a-breadcrumb-item v-if="routeItem?.name != 'Layout'">
                         <span>{{ routeItem?.meta?.title }}</span>
                         <template v-if="routeItem?.children?.length" #overlay>
@@ -28,28 +28,6 @@
             <Search></Search>
             <Notify></Notify>
             <UserDropdown></UserDropdown>
-<!--            <a-dropdown  placement="bottomRight">-->
-<!--                <a-avatar :src="userInfo.headImg" :alt="userInfo.name">{{ userInfo.name }}</a-avatar>-->
-<!--                <template #overlay>-->
-<!--                    <a-menu>-->
-<!--                        <a-menu-item >-->
-<!--                            {{'关于'}}-->
-<!--                        </a-menu-item>-->
-<!--                        <a-menu-item @click="$router.push({ name: 'account-settings' })">-->
-<!--                            {{'个人设置'}}-->
-<!--                        </a-menu-item>-->
-<!--                        <a-menu-divider></a-menu-divider>-->
-<!--                        <a-menu-item>-->
-<!--                            <div @click.prevent="onDropOut">-->
-<!--                                <PoweroffOutlined></PoweroffOutlined>-->
-<!--                                {{'退出程序'}}-->
-<!--                            </div>-->
-<!--                        </a-menu-item>-->
-<!--                    </a-menu>-->
-
-<!--                </template>-->
-<!--            </a-dropdown>-->
-
             <projectSetting></projectSetting>
         </Space>
     </Layout.Header>
@@ -87,8 +65,6 @@ const userStore = useUserStore();
 const router = useRouter();
 const route = useRoute();
 const userInfo = computed(() => userStore.userInfo);
-
-
 
 
 const menus = computed(() => {

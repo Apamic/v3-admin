@@ -9,25 +9,25 @@
                     <ReloadOutlined/>
                     {{ '重新加载' }}
                 </Menu.Item>
-                <Menu.Item key="2"  @click="removeTab">
+                <Menu.Item key="2"  @click="removeTab(route)">
                     <CloseOutlined/>
                     {{ '关闭标签页' }}
                 </Menu.Item>
                 <Menu.Divider />
-                <Menu.Item key="3" @click="closeLeft">
+                <Menu.Item key="3" @click="closeLeft(route)">
                     <VerticalRightOutlined />
                     {{ '关闭左侧标签页' }}
                 </Menu.Item>
-                <Menu.Item key="4" @click="closeRight">
+                <Menu.Item key="4" @click="closeRight(route)">
                     <VerticalLeftOutlined />
                     {{ '关闭右侧标签页' }}
                 </Menu.Item>
                 <Menu.Divider />
-                <Menu.Item key="5" @click="closeOther">
+                <Menu.Item key="5" @click="closeOther(route)">
                     <ColumnWidthOutlined />
                     {{ '关闭其他标签页' }}
                 </Menu.Item>
-                <Menu.Item key="6" @click="closeAll">
+                <Menu.Item key="6" @click="closeAll(route)">
                     <MinusOutlined />
                     {{ '关闭全部标签页' }}
                 </Menu.Item>
@@ -37,7 +37,7 @@
 </template>
 
 <script setup>
-import {Dropdown,Menu} from 'ant-design-vue';
+import {Dropdown,Menu,message} from 'ant-design-vue';
 import {defineOptions, unref,computed} from "vue";
 import { useRoute, useRouter } from 'vue-router';
 import { useTabsViewStore, blackList } from '@/store/modules/tabsView';
@@ -53,6 +53,9 @@ import {
     MinusOutlined,
 } from '@ant-design/icons-vue';
 
+// 标签页列表
+const tabsList = computed(() => tabsViewStore.getTabsList);
+
 
 defineOptions({
     name: "tabContent"
@@ -63,7 +66,7 @@ const router = useRouter();
 
 const tabsViewStore = useTabsViewStore();
 // console.log(route.fullPath)
-console.log(REDIRECT_NAME)
+//console.log(REDIRECT_NAME)
 
 const activeKey = computed(() => tabsViewStore.getCurrentTab?.fullPath);
 
@@ -76,8 +79,12 @@ const reloadPage = () => {
     });
 }
 
-const removeTab = () => {
 
+const removeTab = (route) => {
+    if (tabsList.value.length === 1) {
+        return message.warning('这已经是最后一页，不能再关闭了！');
+    }
+    tabsViewStore.closeCurrentTab(route);
 }
 
 const closeLeft = () => {
