@@ -3,12 +3,13 @@ import { useKeepAliveStore } from './keepAlive';
 import { store } from '@/store';
 import { TABS_ROUTES } from '@/enums/cacheEnum';
 import router from '@/router';
-
-
+import { LOGIN_NAME, REDIRECT_NAME, PAGE_NOT_FOUND_NAME } from '@/enums/routerEnum';
 
 
 // 不需要出现在标签页中的路由
-export const blackList = [];
+export const blackList = [REDIRECT_NAME, LOGIN_NAME, PAGE_NOT_FOUND_NAME];
+
+// export const blackList = [];
 
 export const useTabsViewStore = defineStore({
     id: 'tabs-view',

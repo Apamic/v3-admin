@@ -70,7 +70,7 @@ const keepAliveStore = useKeepAliveStore();
 const activeKey = computed(() => tabsViewStore.getCurrentTab?.fullPath);
 
 // 标签页列表
-const tabsList = computed(() => tabsViewStore.getTabsList.filter((item) => !item.meta?.hideInTabs));
+const tabsList = computed(() => tabsViewStore.getTabsList);
 
 // 缓存的路由组件列表
 const keepAliveComponents = computed(() => keepAliveStore.list);

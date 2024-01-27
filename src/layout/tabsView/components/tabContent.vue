@@ -11,23 +11,23 @@
                 </Menu.Item>
                 <Menu.Item key="2"  @click="removeTab(route)">
                     <CloseOutlined/>
-                    {{ '关闭标签页' }}
+                    {{ '关闭当前标签页' }}
                 </Menu.Item>
                 <Menu.Divider />
-                <Menu.Item key="3" @click="closeLeft(route)">
+                <Menu.Item key="3" @click="closeLeft(route)" :disabled="disabledLeft">
                     <VerticalRightOutlined />
                     {{ '关闭左侧标签页' }}
                 </Menu.Item>
-                <Menu.Item key="4" @click="closeRight(route)">
+                <Menu.Item key="4" @click="closeRight(route)" :disabled="disabledRight">
                     <VerticalLeftOutlined />
                     {{ '关闭右侧标签页' }}
                 </Menu.Item>
                 <Menu.Divider />
-                <Menu.Item key="5" @click="closeOther(route)">
+                <Menu.Item key="5" @click="closeOther(route)" :disabled="tabsList.length === 1">
                     <ColumnWidthOutlined />
                     {{ '关闭其他标签页' }}
                 </Menu.Item>
-                <Menu.Item key="6" @click="closeAll(route)">
+                <Menu.Item key="6" @click="closeAll()" :disabled="tabsList.length === 1">
                     <MinusOutlined />
                     {{ '关闭全部标签页' }}
                 </Menu.Item>
@@ -38,7 +38,7 @@
 
 <script setup>
 import {Dropdown,Menu,message} from 'ant-design-vue';
-import {defineOptions, unref,computed} from "vue";
+import {defineOptions, unref, computed, watch} from "vue";
 import { useRoute, useRouter } from 'vue-router';
 import { useTabsViewStore, blackList } from '@/store/modules/tabsView';
 import {useKeepAliveStore} from '@/store/modules/keepAlive';
@@ -53,13 +53,13 @@ import {
     MinusOutlined,
 } from '@ant-design/icons-vue';
 
-// 标签页列表
-const tabsList = computed(() => tabsViewStore.getTabsList);
-
 
 defineOptions({
     name: "tabContent"
 })
+
+// 标签页列表
+const tabsList = computed(() => tabsViewStore.getTabsList);
 
 const route = useRoute();
 const router = useRouter();
@@ -70,6 +70,22 @@ const tabsViewStore = useTabsViewStore();
 
 const activeKey = computed(() => tabsViewStore.getCurrentTab?.fullPath);
 
+const currentRouteIndex = computed(() => tabsList.value.findIndex(item => item.fullPath === route.fullPath));
+
+const disabledLeft = computed(() =>  {
+    return currentRouteIndex.value > 0 ? false : true
+});
+
+const disabledRight = computed(() => {
+    return  currentRouteIndex.value < unref(tabsList).length - 1  ? false : true
+});
+
+
+// 目标路由是否等于当前路由
+const isCurrentRoute = (route) => {
+    return router.currentRoute.value.matched.some((item) => item.name === route.name);
+};
+
 const reloadPage = () => {
     router.replace({
         name: REDIRECT_NAME,
@@ -79,7 +95,6 @@ const reloadPage = () => {
     });
 }
 
-
 const removeTab = (route) => {
     if (tabsList.value.length === 1) {
         return message.warning('这已经是最后一页，不能再关闭了！');
@@ -87,15 +102,29 @@ const removeTab = (route) => {
     tabsViewStore.closeCurrentTab(route);
 }
 
-const closeLeft = () => {
-
+const closeLeft = (route) => {
+    tabsViewStore.closeLeftTabs(route);
+    !isCurrentRoute(route) && router.replace(route.fullPath);
 }
 
-const closeRight = () => {}
+const closeRight = (route) => {
+    tabsViewStore.closeRightTabs(route);
+    !isCurrentRoute(route) && router.replace(route.fullPath);
+}
 
-const closeOther = () => {}
+const closeOther = (route) => {
+    tabsViewStore.closeOtherTabs(route);
+    !isCurrentRoute(route) && router.replace(route.fullPath);
+}
 
-const closeAll = () => {}
+const closeAll = () => {
+    if (tabsList.value.length === 1) {
+        return message.warning('这已经是最后一页，不能再关闭了！');
+    }
+    localStorage.removeItem('routes');
+    tabsViewStore.closeAllTabs();
+    router.replace('/');
+}
 
 </script>
 
