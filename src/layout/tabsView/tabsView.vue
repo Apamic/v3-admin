@@ -106,7 +106,6 @@ watch(
 );
 
 
-console.log(tabsList.value,'tabsList')
 // 在页面关闭或刷新之前，保存数据
 window.addEventListener('beforeunload', () => {
     Storage.set(TABS_ROUTES, JSON.stringify(tabsList.value));
@@ -136,12 +135,6 @@ const editTabItem = (targetKey, action) => {
         removeTab(tabsList.value.find((item) => item.fullPath == targetKey));
     }
 }
-
-
-// 刷新页面
-const reloadPage = () => {
-
-};
 
 </script>
 

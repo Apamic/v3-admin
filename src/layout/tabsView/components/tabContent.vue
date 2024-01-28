@@ -23,11 +23,11 @@
                     {{ '关闭右侧标签页' }}
                 </Menu.Item>
                 <Menu.Divider />
-                <Menu.Item key="5" @click="closeOther(route)" :disabled="tabsList.length === 1">
+                <Menu.Item key="5" @click="closeOther(route)" :disabled="disabledCloseOther">
                     <ColumnWidthOutlined />
                     {{ '关闭其他标签页' }}
                 </Menu.Item>
-                <Menu.Item key="6" @click="closeAll()" :disabled="tabsList.length === 1">
+                <Menu.Item key="6" @click="closeAll()" :disabled="disabledClose">
                     <MinusOutlined />
                     {{ '关闭全部标签页' }}
                 </Menu.Item>
@@ -65,8 +65,6 @@ const route = useRoute();
 const router = useRouter();
 
 const tabsViewStore = useTabsViewStore();
-// console.log(route.fullPath)
-//console.log(REDIRECT_NAME)
 
 const activeKey = computed(() => tabsViewStore.getCurrentTab?.fullPath);
 
@@ -80,6 +78,12 @@ const disabledRight = computed(() => {
     return  currentRouteIndex.value < unref(tabsList).length - 1  ? false : true
 });
 
+const disabledCloseOther = computed(() => unref(tabsList).length === 1 ? true : false);
+
+const disabledClose = computed(() => {
+    if (route.fullPath === '/dashboard')  return true
+    return disabledCloseOther.value
+});
 
 // 目标路由是否等于当前路由
 const isCurrentRoute = (route) => {

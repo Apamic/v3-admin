@@ -55,7 +55,7 @@ export const useTabsViewStore = defineStore({
         /** 添加标签页 */
         addTabs(route) {
             if (blackList.includes(route.name)) return false;
-            const isExists = this.tabsList.some((item) => item.fullPath == route.fullPath);
+            const isExists = this.tabsList.some((item) => item.fullPath === route.fullPath);
             if (!isExists) {
                 this.tabsList.push(route);
             }
@@ -64,13 +64,13 @@ export const useTabsViewStore = defineStore({
 
         /** 关闭左侧 */
         closeLeftTabs(route) {
-            const index = this.tabsList.findIndex((item) => item.fullPath == route.fullPath);
+            const index = this.tabsList.findIndex((item) => item.fullPath === route.fullPath);
             this.delCompFromClosedTabs(this.tabsList.splice(0, index))
         },
 
         /** 关闭右侧 */
         closeRightTabs(route) {
-            const index = this.tabsList.findIndex((item) => item.fullPath == route.fullPath);
+            const index = this.tabsList.findIndex((item) => item.fullPath === route.fullPath);
             this.delCompFromClosedTabs(this.tabsList.splice(index + 1));
         },
 
@@ -86,7 +86,7 @@ export const useTabsViewStore = defineStore({
 
         /** 关闭当前页 */
         closeCurrentTab(route) {
-            const index = this.tabsList.findIndex((item) => item.fullPath == route.fullPath);
+            const index = this.tabsList.findIndex((item) => item.fullPath === route.fullPath);
             const isDelCurrentTab = Object.is(this.getCurrentTab, this.tabsList[index]);
             this.delCompFromClosedTabs(this.tabsList.splice(index, 1));
             // 如果关闭的tab就是当前激活的tab，则重定向页面
