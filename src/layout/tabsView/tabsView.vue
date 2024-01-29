@@ -13,7 +13,7 @@
             @edit="editTabItem"
         >
             <template v-for="pageItem in tabsList" :key="pageItem.fullPath">
-                <Tabs.TabPane>
+                <Tabs.TabPane >
                     <template #tab>
                         <div style="display: inline-block">
                             {{ pageItem.meta?.title }}
