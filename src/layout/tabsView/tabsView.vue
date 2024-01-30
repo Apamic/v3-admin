@@ -47,7 +47,7 @@
 <script setup>
 import {Dropdown, Tabs, message, Menu} from 'ant-design-vue';
 import {useRoute, useRouter} from 'vue-router';
-import {computed, watch} from "vue";
+import {computed, watch,ref} from "vue";
 import {TABS_ROUTES} from '@/enums/cacheEnum';
 import {useTabsViewStore, blackList} from '@/store/modules/tabsView';
 import {useKeepAliveStore} from '@/store/modules/keepAlive';
@@ -135,6 +135,12 @@ const editTabItem = (targetKey, action) => {
         removeTab(tabsList.value.find((item) => item.fullPath == targetKey));
     }
 }
+
+
+let closable2 = ref(false);
+// setInterval(() => {
+//     return closable2.value = !closable2.value
+// },2000)
 
 </script>
 
