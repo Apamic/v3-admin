@@ -1,6 +1,8 @@
 
 <template>
-  <ConfigProvider :locale="getAntdLocale" :theme="themeConfig">
+  <ConfigProvider :locale="getAntdLocale"
+                  :theme="themeConfig"
+  >
     <router-view #="{ Component }">
       <component :is="Component" />
     </router-view>
@@ -12,9 +14,12 @@
 <script setup>
 import { ConfigProvider } from 'ant-design-vue';
 import {computed} from "vue";
+import Locale from '@/locales/lang/en.js';
 
-let getAntdLocale = 'ar_EG';
 
+let getAntdLocale = Locale;
+
+const themeConfig = {}
 
 // const themeConfig = computed(() =>
 //     Object.assign(

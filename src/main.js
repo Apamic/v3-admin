@@ -6,7 +6,7 @@ import './styles/global.less'
 import App from './App.vue'
 import { setupRouter } from './router';
 import { setupStore } from '@/store';
-
+import { setupI18n } from '@/locales/setupI18n';
 
 const app = createApp(App)
 
@@ -14,11 +14,13 @@ const app = createApp(App)
 async function setupApp() {
     setupStore(app);
 
-    await setupRouter(app)
+    await setupI18n(app);
 
-    app.config.productionTip = false
+    await setupRouter(app);
 
-    app.mount('#app')
+    app.config.productionTip = false;
+
+    app.mount('#app');
 }
 
 

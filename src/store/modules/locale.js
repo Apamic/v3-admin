@@ -1,7 +1,7 @@
 import {defineStore} from "pinia";
 import { Storage } from '@/utils/Storage';
 import { LOCALE_KEY } from '@/enums/cacheEnum';
-
+import { store } from '@/store';
 
 export const useLocaleStore  = defineStore({
     id: 'locale',
@@ -23,5 +23,5 @@ export const useLocaleStore  = defineStore({
 
 
 export function useLocaleStoreWithOut() {
-    return useLocaleState(store);
+    return useLocaleStore(store);
 }
