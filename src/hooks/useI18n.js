@@ -34,8 +34,12 @@ export function useI18n(namespace) {
             getKey(namespace, key),
             ...arg
         )
-    }
+    };
 
+    return {
+        ...methods,
+        t: tFn,
+    };
 }
 
 

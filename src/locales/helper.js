@@ -1,4 +1,4 @@
-
+import { set } from 'lodash-es';
 
 export const loadLocalePool = [];
 
@@ -22,11 +22,13 @@ export function genMessage(langs,prefix = 'lang') {
         const objKey = keyList.join('.');
 
         if (moduleName) {
-
+            if (objKey) {
+                set(obj,moduleName,obj[moduleName] || {});
+                set(obj[moduleName], objKey, langFileModule);
+            }
         } else {
-
+            set(obj, moduleName, langFileModule || {});
         }
-
     });
     return obj;
 }

@@ -14,10 +14,10 @@
 <script setup>
 import { ConfigProvider } from 'ant-design-vue';
 import {computed} from "vue";
-import Locale from '@/locales/lang/en.js';
+import { useLocale } from "@/locales/useLocale.js";
 
 
-let getAntdLocale = Locale;
+let {getAntdLocale} = useLocale();
 
 const themeConfig = {}
 
