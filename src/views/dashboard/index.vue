@@ -2,8 +2,9 @@
     <div class="view-container">
         dash board
         {{ t('common.okText')}}
-        {{useI18n()}}
+<!--        {{useI18n()}}-->
 <!--        {{localeList}}-->
+        {{ t('layout.setting.footer')}}
         content
     </div>
 </template>
@@ -18,8 +19,6 @@ import { useLocale } from '@/locales/useLocale';
 defineOptions({
     name: 'index'
 })
-
-console.log(useI18n().message)
 
 const {t} = useI18n();
 

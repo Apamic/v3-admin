@@ -17,6 +17,7 @@ export function genMessage(langs,prefix = 'lang') {
         const langFileModule = langs[key].default;
         let fileName = key.replace(`./${prefix}/`, '').replace(/^\.\//, '');
         const lastIndex = fileName.lastIndexOf('.');
+        fileName = fileName.substr(0,lastIndex);
         const keyList = fileName.split('/');
         const moduleName = keyList.shift();
         const objKey = keyList.join('.');
@@ -25,9 +26,9 @@ export function genMessage(langs,prefix = 'lang') {
             if (objKey) {
                 set(obj,moduleName,obj[moduleName] || {});
                 set(obj[moduleName], objKey, langFileModule);
+            } else {
+                set(obj,moduleName, langFileModule || {});
             }
-        } else {
-            set(obj, moduleName, langFileModule || {});
         }
     });
     return obj;

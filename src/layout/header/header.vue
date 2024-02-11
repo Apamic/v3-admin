@@ -27,6 +27,7 @@
             <!--            <fullScreen></fullScreen>-->
             <Search></Search>
             <Notify></Notify>
+            <LocalePicker></LocalePicker>
             <UserDropdown></UserDropdown>
             <projectSetting></projectSetting>
         </Space>
@@ -44,6 +45,8 @@ import {Modal,message,Layout,Space} from "ant-design-vue";
 import Search from './components/search/index.vue';
 import Notify from './components/notify/index.vue';
 import UserDropdown from './components/userDropdown/index.vue'
+import LocalePicker from '@/components/basic/localePicker/index.vue';
+
 
 defineProps({
     collapsed: {

@@ -89,7 +89,10 @@ export default defineConfig(({command, mode}) => {
             }
         },
         optimizeDeps: { //预编译
-            include: [],
+            include: [
+                'ant-design-vue/es/locale/zh_CN',
+                'ant-design-vue/es/locale/en_US',
+            ],
         },
         esbuild: {
             pure: VITE_DROP_CONSOLE ? ['console.log', 'debugger'] : [],

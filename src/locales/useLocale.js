@@ -38,7 +38,10 @@ export function useLocale() {
             return locale;
         }
 
-        const langModule = await import(`./lang/${locale}.js`).default;
+        let langModule = await import(`./lang/${locale}.js`);
+
+        langModule = langModule.default
+
         if (!langModule) return;
 
         const { message } = langModule;
