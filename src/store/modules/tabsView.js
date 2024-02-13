@@ -11,6 +11,7 @@ export const blackList = [REDIRECT_NAME, LOGIN_NAME, PAGE_NOT_FOUND_NAME];
 
 // export const blackList = [];
 
+
 export const useTabsViewStore = defineStore({
     id: 'tabs-view',
     state: () => ({
@@ -35,8 +36,8 @@ export const useTabsViewStore = defineStore({
     actions: {
         /** 将已关闭的标签页的组件从keep-alive中移除 */
         delCompFromClosedTabs(closedTabs) {
-            const keepAliveStore = useKeepAliveStore();
             const routes = router.getRoutes();
+            const keepAliveStore = useKeepAliveStore();
             const compNames = closedTabs.reduce((prev,curr) => {
                 if (curr.name && router.hasRoute(curr.name)) {
                     const componentName = routes.find((n) => n.name === curr.name)?.components?.default?.name;
@@ -77,10 +78,12 @@ export const useTabsViewStore = defineStore({
         /** 关闭其他 */
         closeOtherTabs(route) {
             const targetIndex = this.tabsList.findIndex((item) => item.fullPath === route.fullPath);
+            const keepAliveStore = useKeepAliveStore();
             if (targetIndex !== -1) {
                 const current = this.tabsList.splice(targetIndex,1)
-                this.delCompFromClosedTabs(this.tabsList);
                 this.tabsList = current;
+                keepAliveStore.update(current);
+                console.log(keepAliveStore.list,'list')
             }
         },
 

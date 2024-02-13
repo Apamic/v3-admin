@@ -100,7 +100,10 @@ watch(
             return
         }
         tabsViewStore.addTabs(getSimpleRoute(route));
-        console.log(keepAliveComponents.value,'keepAliveComponents')
+        // console.log(tabsViewStore.getTabsList)
+        // keepAliveStore.add(...tabsList)
+        keepAliveStore.update(tabsList.value);
+        // console.log(keepAliveComponents.value,'keepAliveComponents')
     },
     {immediate: true},
 );
