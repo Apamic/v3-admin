@@ -1,6 +1,5 @@
 <template>
-    <div class="tabs-view">
-
+    <div class="ant-tabs-view">
         <Tabs
             :active-key="activeKey"
             hide-add
@@ -103,7 +102,7 @@ watch(
         // console.log(tabsViewStore.getTabsList)
         // keepAliveStore.add(...tabsList)
         keepAliveStore.update(tabsList.value);
-        // console.log(keepAliveComponents.value,'keepAliveComponents')
+        console.log(keepAliveComponents.value,'keepAliveComponents')
     },
     {immediate: true},
 );
@@ -147,8 +146,8 @@ let closable2 = ref(false);
 
 </script>
 
-<style lang="less" scoped>
-.tabs-view {
+<style lang="less">
+.ant-tabs-view {
     border-top: 1px solid #eee;
 
     .tabs-list {
@@ -173,4 +172,15 @@ let closable2 = ref(false);
     }
 
 }
+
+.ant-tabs-view {
+    .ant-tabs-nav > div:nth-child(1) {
+        padding: 0 6px;
+    }
+}
+
+
+
+
+
 </style>

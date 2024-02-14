@@ -66,7 +66,7 @@ export const useTabsViewStore = defineStore({
         /** 关闭左侧 */
         closeLeftTabs(route) {
             const index = this.tabsList.findIndex((item) => item.fullPath === route.fullPath);
-            this.delCompFromClosedTabs(this.tabsList.splice(0, index))
+            this.delCompFromClosedTabs(this.tabsList.splice(0, index));
         },
 
         /** 关闭右侧 */
