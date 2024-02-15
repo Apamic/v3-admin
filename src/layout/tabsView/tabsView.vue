@@ -7,7 +7,7 @@
             :animated="false"
             type="editable-card"
             :tabBarGutter="3"
-            class="tabs"
+            :class="getWrapClass"
             @change="changePage"
             @edit="editTabItem"
         >
@@ -138,49 +138,66 @@ const editTabItem = (targetKey, action) => {
     }
 }
 
-
-let closable2 = ref(false);
-// setInterval(() => {
-//     return closable2.value = !closable2.value
-// },2000)
-
+const getWrapClass = computed(() => {
+    return [
+        'ant-tabs-view',
+    ]
+})
 </script>
 
 <style lang="less">
 .ant-tabs-view {
     border-top: 1px solid #eee;
+    background: #ffffff;
+    .ant-tabs-nav {
+        margin: 0;
 
-    .tabs-list {
-        display: flex;
-        align-items: center;
-        padding: 4px 20px 0 10px;
-        background: #ffffff;
+        .ant-tabs-tab {
+            padding-right: 12px;
+            //background: #1890ff;
+            //line-height: 20px;
+            border: 0;
+            &:hover {
+                .ant-tabs-tab-remove {
+                    opacity: 1;
+                }
+            }
+            .ant-tabs-tab-remove {
+                width: 8px;
+                height: 30px;
+                margin-right: -4px;
+                margin-left: 2px;
+                transition: none;
+                opacity: 0;
+                color: inherit;
+                font-size: 12px;
 
+                &:hover {
+                    svg {
+                        width: 0.8em;
+                    }
+                }
+                svg {
+                    fill: red;
+                }
+            }
+        }
     }
-
-    .tabs {
-        //flex: 1;
-        height: 32px;
-        background: #ffffff;
-    }
-
-    .tabs-view-content {
-        /* height: calc(100vh - #{$header-height}); */
-        //height: calc(100vh - 110px);
-        //padding: 20px 14px 0;
-        //overflow: auto;
-    }
-
-}
-
-.ant-tabs-view {
     .ant-tabs-nav > div:nth-child(1) {
         padding: 0 6px;
     }
+
+    .ant-tabs-tab:not(.ant-tabs-tab-active) {
+        &:hover {
+            color: #1890ff;
+        }
+    }
+
+    &--hide-close {
+        .ant-tabs-tab-remove {
+            opacity: 0 !important;
+        }
+    }
 }
-
-
-
-
 
 </style>
