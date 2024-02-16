@@ -12,7 +12,7 @@
             @edit="editTabItem"
         >
             <template v-for="pageItem in tabsList" :key="pageItem.fullPath">
-                <Tabs.TabPane >
+                <Tabs.TabPane>
                     <template #tab>
                         <div style="display: inline-block">
                             {{ pageItem.meta?.title }}
@@ -46,7 +46,7 @@
 <script setup>
 import {Dropdown, Tabs, message, Menu} from 'ant-design-vue';
 import {useRoute, useRouter} from 'vue-router';
-import {computed, watch,ref} from "vue";
+import {computed, watch, ref} from "vue";
 import {TABS_ROUTES} from '@/enums/cacheEnum';
 import {useTabsViewStore, blackList} from '@/store/modules/tabsView';
 import {useKeepAliveStore} from '@/store/modules/keepAlive';
@@ -102,7 +102,7 @@ watch(
         // console.log(tabsViewStore.getTabsList)
         // keepAliveStore.add(...tabsList)
         keepAliveStore.update(tabsList.value);
-        console.log(keepAliveComponents.value,'keepAliveComponents')
+        console.log(keepAliveComponents.value, 'keepAliveComponents')
     },
     {immediate: true},
 );
@@ -149,53 +149,101 @@ const getWrapClass = computed(() => {
 .ant-tabs-view {
     border-top: 1px solid #eee;
     background: #ffffff;
-    .ant-tabs-nav {
-        margin: 0;
 
-        .ant-tabs-tab {
-            padding-right: 12px;
-            //background: #1890ff;
-            //line-height: 20px;
-            border: 0;
-            &:hover {
+    .ant-tabs.ant-tabs-card {
+
+        .ant-tabs-nav {
+            margin: 0;
+            padding-top: 2px;
+            height: 30px;
+            background: #fff;
+            box-shadow: none;
+            .ant-tabs-nav-container {
+                height: 30px;
+                padding-top: 2px;
+            }
+            .ant-tabs-tab {
+                padding-right: 12px;
+                height: 30px;
+                transition: none;
+                background: #fff;
+                line-height: 30px;
+                color: rgba(0,0,0,.85);
+                &:hover {
+                    .ant-tabs-tab-remove {
+                        opacity: 1;
+                    }
+                }
+                .ant-tabs-tab-remove {
+                    width: 8px;
+                    height: 30px;
+                    margin-right: -4px;
+                    margin-left: 2px;
+                    transition: none;
+                    opacity: 0;
+                    color: inherit;
+                    font-size: 12px;
+
+                    &:hover {
+                        svg {
+                            width: 0.8em;
+                        }
+                    }
+                }
+
+                svg {
+                    fill: rgba(0,0,0,.85);
+                }
+            }
+            .ant-tabs-tab:not(.ant-tabs-tab-active) {
+                &:hover {
+                    color: #0960bd;
+                }
+            }
+            .ant-tabs-tab-active {
+                position: relative;
+                padding-left: 18px;
+                transition: none;
+                border: 0;
+                background: #0960bd;
+
+                div {
+                    color: #fff !important;
+                }
+
                 .ant-tabs-tab-remove {
                     opacity: 1;
                 }
+
+                svg {
+                    width: 0.7em;
+                    fill: #fff;
+                }
             }
-            .ant-tabs-tab-remove {
-                width: 8px;
-                height: 30px;
-                margin-right: -4px;
-                margin-left: 2px;
-                transition: none;
-                opacity: 0;
-                color: inherit;
+            .ant-tabs-nav > div:nth-child(1) {
+                padding: 0 6px;
+                .ant-tabs-tab {
+                    margin-right: 3px !important;
+                }
+            }
+        }
+        .ant-tabs-tab:not(.ant-tabs-tab-active) {
+            .anticon-close {
                 font-size: 12px;
 
-                &:hover {
-                    svg {
-                        width: 0.8em;
-                    }
-                }
                 svg {
-                    fill: red;
+                    width: 0.6em;
                 }
             }
         }
-    }
-    .ant-tabs-nav > div:nth-child(1) {
-        padding: 0 6px;
-    }
 
-    .ant-tabs-tab:not(.ant-tabs-tab-active) {
-        &:hover {
-            color: #1890ff;
-        }
-    }
-
-    &--hide-close {
-        .ant-tabs-tab-remove {
-            opacity: 0 !important;
+        .ant-tabs-extra-content {
+            .redo {
+                cursor: pointer;
+                &:hover {
+                    color: rgba(0,0,0,.85);
+                }
+            }
         }
     }
 }
