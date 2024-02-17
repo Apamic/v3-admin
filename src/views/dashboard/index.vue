@@ -6,6 +6,9 @@
 <!--        {{localeList}}-->
         {{ t('layout.setting.footer')}}
         content
+        <div v-for="(item,index) in 100 ">
+            {{index}}
+        </div>
     </div>
 </template>
 
@@ -22,34 +25,6 @@ defineOptions({
 
 const {t} = useI18n();
 
-const selectedKeys = ref([]);
-
-const { changeLocale, getLocale } = useLocale();
-
-const getLocaleText = computed(() => {
-    const key = selectedKeys.value[0];
-    if (!key) {
-        return '';
-    }
-    return localeList.find((item) => item.lang === key)?.label;
-});
-
-watchEffect(() => {
-    selectedKeys.value = [unref(getLocale)];
-});
-
-async function toggleLocale(lang) {
-    await changeLocale(lang );
-    selectedKeys.value = [lang ];
-    props.reload && location.reload();
-}
-
-function handleMenuClick({ key }) {
-    if (unref(getLocale) === key) {
-        return;
-    }
-    toggleLocale(key);
-}
 
 // console.log(import.meta.env)
 // console.log(__APP_INFO__)

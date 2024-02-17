@@ -1,26 +1,29 @@
 <template>
-    <a-layout class="layout">
-        <a-layout-sider class="layout-sider" style="min-height: 100vh;" collapsible v-model:collapsed="collapsed" :width="asiderWidth" :trigger="null">
+    <Layout class="layout">
+        <Layout.Sider class="layout-sider" style="min-height: 100vh;" collapsible v-model:collapsed="collapsed" :width="asiderWidth" :trigger="null">
             <Logo :collapsed="collapsed"></Logo>
             <AsideMenu :collapsed="collapsed"></AsideMenu>
-        </a-layout-sider>
-        <a-layout>
+        </Layout.Sider>
+        <Layout>
             <PageHeader v-model:collapsed="collapsed"></PageHeader>
-            <a-layout-content class="layout-content">
-                <tabsView></tabsView>
-            </a-layout-content>
-            <a-layout-footer>
+            <tabsView></tabsView>
+            <Layout.Content class="layout-content">
+                <PageLayout></PageLayout>
+            </Layout.Content>
+            <Layout.Footer>
                 <PageFooter></PageFooter>
-            </a-layout-footer>
-        </a-layout>
-    </a-layout>
+            </Layout.Footer>
+        </Layout>
+    </Layout>
 
 </template>
 
 <script setup>
+import {Layout} from "ant-design-vue";
 import PageHeader from './header/header.vue';
 import PageFooter from './footer/footer.vue';
 import AsideMenu from './menu/menu.vue';
+import PageLayout from './page/index.vue'
 import Logo from './logo/index.vue';
 import tabsView from './tabsView/tabsView.vue';
 
@@ -51,9 +54,14 @@ const asiderWidth = computed(() => (collapsed.value ? 80 : 200));
     }
 
     .layout-content {
-        flex: none;
-        //margin: 24px 16px 0;
-        overflow: inherit;
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        flex-grow: 1;
+        width: 100%;
+        height: 0;
+        min-height: 0;
+        overflow: auto;
     }
 }
 

@@ -7,7 +7,7 @@
             </span>
 
             <a-breadcrumb>
-                <template v-for="(routeItem,rotueIndex) in menus" :key="routeItem.fullPath" >
+                <template v-for="(routeItem,rotueIndex) in menus" :key="routeItem.fullPath">
                     <a-breadcrumb-item v-if="routeItem?.name != 'Layout'">
                         <span>{{ routeItem?.meta?.title }}</span>
                         <template v-if="routeItem?.children?.length" #overlay>
@@ -23,25 +23,25 @@
                 </template>
             </a-breadcrumb>
         </Space>
-        <Space size="large">
+        <div class="view-layout-header-action">
             <!--            <fullScreen></fullScreen>-->
-            <Search></Search>
-            <Notify></Notify>
-            <LocalePicker></LocalePicker>
-            <UserDropdown></UserDropdown>
-            <projectSetting></projectSetting>
-        </Space>
+            <Search :class="`view-action-item`"></Search>
+            <Notify :class="`view-action-item notify-item`"></Notify>
+            <LocalePicker :class="`view-action-item`"></LocalePicker>
+            <UserDropdown :class="`view-action-item`"></UserDropdown>
+            <projectSetting :class="`view-action-item`"></projectSetting>
+        </div>
     </Layout.Header>
 </template>
 
 <script lang="tsx" setup>
-import {MenuUnfoldOutlined, MenuFoldOutlined,PoweroffOutlined,QuestionCircleOutlined } from '@ant-design/icons-vue';
+import {MenuUnfoldOutlined, MenuFoldOutlined, PoweroffOutlined, QuestionCircleOutlined} from '@ant-design/icons-vue';
 import {computed, nextTick, ref} from "vue";
 import {useRouter, useRoute} from 'vue-router';
 import {useUserStore} from '@/store/modules/user.js';
 import fullScreen from './components/fullScreen/index.vue';
 import projectSetting from './components/setting.vue';
-import {Modal,message,Layout,Space} from "ant-design-vue";
+import {Modal, message, Layout, Space} from "ant-design-vue";
 import Search from './components/search/index.vue';
 import Notify from './components/notify/index.vue';
 import UserDropdown from './components/userDropdown/index.vue'
@@ -77,7 +77,7 @@ const menus = computed(() => {
     return route.matched;
 })
 
-console.log(menus.value,'menus')
+console.log(menus.value, 'menus')
 
 const getSelectKeys = (rotueIndex) => {
     return [menus.value[rotueIndex + 1]?.name]
@@ -127,7 +127,7 @@ const clickMenuItem = (menuItem) => {
 const onDropOut = () => {
     Modal.confirm({
         title: '您确定要退出登录吗？',
-        icon: <QuestionCircleOutlined />,
+        icon: <QuestionCircleOutlined/>,
         centered: true,
         onOk: async () => {
             if (userStore.userInfo.phone !== '15172364292') {
@@ -148,7 +148,6 @@ const onDropOut = () => {
 </script>
 
 <style lang="less" scoped>
-
 .layout-header {
     display: flex;
     position: sticky;
@@ -156,9 +155,10 @@ const onDropOut = () => {
     top: 0;
     align-items: center;
     justify-content: space-between;
-    padding: 0 24px;
+    padding-left:24px;
     height: 48px;
     line-height: 48px;
+
     * {
         cursor: pointer;
     }
@@ -174,4 +174,33 @@ const onDropOut = () => {
 .trigger:hover {
     color: #1890ff;
 }
+
+
+</style>
+<style lang="less">
+.view-layout-header-action {
+    display: flex;
+    align-items: center;
+
+    .view-action-item {
+        display: flex !important;
+        align-items: center;
+        height: 48px;
+        padding: 0 10px;
+        font-size: 1.2em;
+
+        &:hover {
+            background-color: #f6f6f6;
+        }
+    }
+
+    .notify-item {
+        .ant-badge {
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+        }
+    }
+}
+
 </style>

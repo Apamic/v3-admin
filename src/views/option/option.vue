@@ -13,12 +13,7 @@ console.log( useUserStore().name)
 
 <style lang="less" scoped>
 .box {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: calc(100vh - 120px);
-    padding: 12px;
-    background: #fff;
+
 img {
     flex: 1;
     min-height: 0;

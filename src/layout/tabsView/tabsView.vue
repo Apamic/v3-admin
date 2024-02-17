@@ -25,21 +25,6 @@
                 <TabRedo></TabRedo>
             </template>
         </Tabs>
-        <view class="tabs-view-content">
-            <router-view v-slot="{ Component }">
-                <template v-if="Component">
-                    <transition
-                        :name="Object.is(route.meta?.transitionName, false) ? '' : 'fade-transform'"
-                        mode="out-in"
-                        appear
-                    >
-                        <keep-alive :include="keepAliveComponents">
-                            <component :is="Component" :key="route.fullPath"/>
-                        </keep-alive>
-                    </transition>
-                </template>
-            </router-view>
-        </view>
     </div>
 </template>
 
@@ -220,11 +205,11 @@ const getWrapClass = computed(() => {
                     fill: #fff;
                 }
             }
-            .ant-tabs-nav > div:nth-child(1) {
-                padding: 0 6px;
-                .ant-tabs-tab {
-                    margin-right: 3px !important;
-                }
+        }
+        .ant-tabs-nav > div:nth-child(1) {
+            padding: 0 6px;
+            .ant-tabs-tab {
+                margin-right: 3px !important;
             }
         }
         .ant-tabs-tab:not(.ant-tabs-tab-active) {
