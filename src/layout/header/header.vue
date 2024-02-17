@@ -199,6 +199,10 @@ const onDropOut = () => {
             display: flex;
             align-items: center;
             font-size: 18px;
+            .ant-badge-dot {
+                top: -4px;
+                right: -4px;
+            }
         }
     }
 }
