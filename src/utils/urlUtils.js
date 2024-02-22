@@ -17,5 +17,12 @@ export const setObjToUrlParams = (baseUrl,obj) => {
     return url;
 }
 
+export const parseQuery = (url) => {
+    let q = {};
+    url.replace(/([^?&=]+)=([^&]+)/g,(_,k,v) => (q[k] = v));
+    return q;
+};
+
+
 
 
