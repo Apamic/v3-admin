@@ -1,18 +1,18 @@
 <template>
     <view class="tabs-view-content">
-        <router-view v-slot="{ Component }">
+        <RouterView v-slot="{ Component }">
             <template v-if="Component">
-                <transition
+                <Transition
                     :name="Object.is(route.meta?.transitionName, false) ? '' : 'fade-transform'"
                     mode="out-in"
                     appear
                 >
-                    <keep-alive :include="keepAliveComponents">
+                    <KeepAlive :include="keepAliveComponents">
                         <component :is="Component" :key="route.fullPath"/>
-                    </keep-alive>
-                </transition>
+                    </KeepAlive>
+                </Transition>
             </template>
-        </router-view>
+        </RouterView >
     </view>
 </template>
 
@@ -32,8 +32,6 @@ const route = useRoute();
 const keepAliveStore = useKeepAliveStore();
 
 const keepAliveComponents = computed(() => keepAliveStore.list);
-
-
 
 </script>
 

@@ -1,6 +1,6 @@
 <template>
     <Layout.Header class="layout-header" :style="headerStyle">
-        <Space size="large">
+        <div style="display: flex;align-items: center;height: 48px;">
 
             <span class="trigger" @click="() => emit('update:collapsed', !collapsed)">
                <component :is="collapsed ? MenuUnfoldOutlined : MenuFoldOutlined"/>
@@ -22,7 +22,7 @@
                     </a-breadcrumb-item>
                 </template>
             </a-breadcrumb>
-        </Space>
+        </div>
         <div class="view-layout-header-action">
             <!--            <fullScreen></fullScreen>-->
             <Search :class="`view-action-item`"></Search>
@@ -155,7 +155,8 @@ const onDropOut = () => {
     top: 0;
     align-items: center;
     justify-content: space-between;
-    padding-left:24px;
+    padding-left: 0;
+    padding-right: 0;
     height: 48px;
     line-height: 48px;
 
@@ -165,9 +166,11 @@ const onDropOut = () => {
 }
 
 .trigger {
+    padding: 0 10px;
+    margin-right: 20px;
     font-size: 18px;
     //color: #000;
-    line-height: 64px;
+    line-height: 48px;
     transition: color 0.3s;
 }
 

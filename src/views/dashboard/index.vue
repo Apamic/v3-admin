@@ -7,7 +7,9 @@
         {{ t('layout.setting.footer')}}
         content
         <div v-for="(item,index) in 100 " style="color: rgb(34.077,34.077,34.077);">
-            {{index}}
+            <div v-if="defer(index)">
+                {{index}}
+            </div>
         </div>
     </div>
 </template>
@@ -23,7 +25,7 @@ import {pick} from "@/utils/other";
 import {randomColor, randomString} from "@/utils/randoms";
 import {removeTag,dayOfYear} from "@/utils/other";
 import {gray} from "../../utils/other";
-
+import {useDefer} from "@/hooks/useDefer";
 
 
 defineOptions({
@@ -42,6 +44,8 @@ console.log(dayOfYear(new Date(2023,10,22)))
 console.log(gray(12,25,189));
 // console.log(import.meta.env)
 // console.log(__APP_INFO__)
+
+const defer = useDefer();
 </script>
 
 <style lang="less" scoped>
